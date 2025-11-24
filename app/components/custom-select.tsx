@@ -79,7 +79,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
               className={`px-4 py-3 cursor-pointer transition-colors ${
                 value === option.value
                   ? "bg-[rgba(212,170,0,0.2)]"
-                  : "hover:bg-white hover:bg-opacity-10"
+                  : "hover:bg-[rgba(212,170,0,0.2)] hover:bg-opacity-10"
               }`}
               onClick={() => {
                 onChange(option.value);
