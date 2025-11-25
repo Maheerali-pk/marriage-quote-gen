@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary: rgb(212, 170, 0);
+}
+@theme {
+  --color-primary: var(--primary);
+}
+
 body,
 html {
   height: 100%;

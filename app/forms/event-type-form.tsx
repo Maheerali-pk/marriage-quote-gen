@@ -3,14 +3,15 @@ import CustomInput from "../components/custom-input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import CustomSelect from "../components/custom-select";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 interface NameFormProps {}
 
 const NameForm: React.FC<NameFormProps> = () => {
-  const [selectedEventType, setSelectedEventType] = useState("0");
+  const [state, dispatch] = useGlobalContext();
   const router = useRouter();
   const handleNext = () => {
-    router.push("/event-type");
+    router.push("/event-date");
   };
   return (
     <div className="flex flex-col h-full justify-between">
@@ -23,8 +24,8 @@ const NameForm: React.FC<NameFormProps> = () => {
         </h1>
         <div className="flex flex-col w-full gap-8">
           <CustomSelect
-            value={selectedEventType}
-            onChange={setSelectedEventType}
+            value={state.eventType}
+            onChange={(value) => dispatch({ setState: { eventType: value } })}
             options={[
               { value: "0", label: "Dasmë" },
               { value: "1", label: "Natë Dasmeje" },

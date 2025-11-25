@@ -2,12 +2,12 @@
 import CustomInput from "../components/custom-input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 interface NameFormProps {}
 
 const NameForm: React.FC<NameFormProps> = () => {
-  const [brideName, setBrideName] = useState("");
-  const [groomName, setGroomName] = useState("");
+  const [state, dispatch] = useGlobalContext();
   const router = useRouter();
   const handleNext = () => {
     router.push("/event-type");
@@ -23,14 +23,14 @@ const NameForm: React.FC<NameFormProps> = () => {
         </h1>
         <div className="flex flex-col w-full gap-8">
           <CustomInput
-            value={brideName}
-            onChange={setBrideName}
+            value={state.brideName}
+            onChange={(value) => dispatch({ setState: { brideName: value } })}
             label="Emri dhe Mbiemri"
           />
 
           <CustomInput
-            value={groomName}
-            onChange={setGroomName}
+            value={state.groomName}
+            onChange={(value) => dispatch({ setState: { groomName: value } })}
             label="Emri i dhenderrit"
           />
         </div>
