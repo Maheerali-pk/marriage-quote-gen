@@ -1,8 +1,9 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useMemo } from "react";
 import { allEventGroups, allEventItems, IEventGroup } from "../helpers/data";
 import EventItem from "./event-item";
 import classNames from "classnames";
 import { useGlobalContext } from "../contexts/GlobalContext";
+import PriceValue from "./price-value";
 
 interface EventGroupWrapperProps {
   data: IEventGroup;
@@ -15,11 +16,22 @@ const EventGroupWrapper: FunctionComponent<EventGroupWrapperProps> = ({
   const mySubItems = allEventItems.filter((item) =>
     item.availableForEvents.includes(data.id)
   );
+  const checkedSubItems = mySubItems.filter((item) =>
+    state.selections
+      ?.find((selection) => selection.eventGroupId === data.id)
+      ?.selectedItemIds.includes(item.id)
+  );
   const myGroup = state.selections?.find(
     (selection) => selection.eventGroupId === data.id
   );
 
   const isSelected = myGroup?.selectedItemIds.length === mySubItems.length;
+  const totalPrice = useMemo(() => {
+    return checkedSubItems.reduce((acc, item) => acc + item.price, 0);
+  }, [checkedSubItems]);
+  const totalDiscountedPrice = useMemo(() => {
+    return totalPrice * (1 - data.discountPercentage / 100);
+  }, [totalPrice, data.discountPercentage]);
   const renderSelectionIcon = () => {
     if (isSelected) {
       return (
@@ -70,6 +82,9 @@ const EventGroupWrapper: FunctionComponent<EventGroupWrapperProps> = ({
             data={item}
           />
         ))}
+      </div>
+      <div className="flex w-full justify-end">
+        <PriceValue value={totalPrice} discountedValue={totalDiscountedPrice} />
       </div>
     </div>
   );

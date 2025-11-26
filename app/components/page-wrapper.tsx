@@ -13,6 +13,7 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
       }}
     >
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-30 "></div>
 
       <img
         src="/images/logo.png"
