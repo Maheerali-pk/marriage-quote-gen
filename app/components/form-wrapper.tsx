@@ -4,7 +4,7 @@ interface FormWrapperProps {
 
 const FormWrapper: React.FC<FormWrapperProps> = ({ children }) => {
   return (
-    <div className="w-screen  md:w-[50vw] lg:w-[25vw] h-[75vh] bg-pri border-[rgba(212,170,0,0.7)] border-2  rounded-4xl p-10 bg-[rgba(0,0,0,0.5)]">
+    <div className="w-[90vw]  md:w-[50vw] lg:w-[25vw] h-[75vh] bg-pri border-[rgba(212,170,0,0.7)] border-2  rounded-4xl p-10 bg-[rgba(0,0,0,0.5)]">
       {children}
     </div>
   );
