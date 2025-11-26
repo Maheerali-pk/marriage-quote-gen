@@ -90,6 +90,7 @@ const EventDateForm: React.FC<EventDateFormProps> = () => {
             }}
             label="shkruaj daten e dasmes tuaj ketu"
           />
+
           {error && <div className="text-red-500 text-sm -mt-6">{error}</div>}
         </div>
       </div>

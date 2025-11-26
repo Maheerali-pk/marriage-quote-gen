@@ -1,11 +1,8 @@
 "use client";
-import CustomInput from "../components/custom-input";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "../contexts/GlobalContext";
-import { ColorRing } from "react-loader-spinner";
 import { formatDate } from "../helpers/utils";
-import DidYouKnow from "../components/did-you-know";
 
 interface EventDateFormProps {}
 

@@ -5,7 +5,7 @@ interface PageWrapperProps {
 const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
   return (
     <div
-      className="h-full w-full flex justify-center items-center "
+      className="h-full w-full flex justify-center"
       style={{
         backgroundImage: "url('/images/main-bg.png')",
         backgroundSize: "cover",

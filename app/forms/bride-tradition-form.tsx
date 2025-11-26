@@ -1,10 +1,8 @@
 "use client";
 import CustomInput from "../components/custom-input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "../contexts/GlobalContext";
-import { ColorRing } from "react-loader-spinner";
-import { formatDate } from "../helpers/utils";
 import DidYouKnow from "../components/did-you-know";
 
 interface BrideTraditionFormProps {}
@@ -13,9 +11,38 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
   const [state, dispatch] = useGlobalContext();
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [showDidYouKnow, setShowDidYouKnow] = useState<boolean>(false);
   const router = useRouter();
 
-  const handleNext = () => {};
+  const handleNext = () => {
+    if (state.brideTradition === false) {
+      setShowDidYouKnow(true);
+      setTimeout(() => {
+        router.push("/church-or-mosque");
+      }, 3000);
+    }
+    if (
+      state.brideTradition === true &&
+      state.brideLocation &&
+      state.groomLocation
+    ) {
+      setShowDidYouKnow(true);
+      setTimeout(() => {
+        router.push("/church-or-mosque");
+      }, 3000);
+    }
+  };
+  if (showDidYouKnow) {
+    return (
+      <div className="flex flex-col h-full items-center pt-12 gap-12">
+        <img className="w-2/3 h-auto" src="/images/did-you-know2.png"></img>
+        <DidYouKnow
+          title="A e keni ditur se:"
+          description="Ne i kushtojmë rendesi të veqant traditave shqiptare sikurse marrja e nuses!"
+        ></DidYouKnow>
+      </div>
+    );
+  }
   const renderContent = () => {
     if (state.brideTradition === undefined) {
       return (
@@ -27,7 +54,10 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
             PO
           </div>
           <div
-            onClick={() => dispatch({ setState: { brideTradition: false } })}
+            onClick={() => {
+              dispatch({ setState: { brideTradition: false } });
+              router.push("/bride-tradition");
+            }}
             className="flex cursor-pointer text-2xl aspect-square hover:scale-105 transition-all duration-300 h-32 w-32 rounded-2xl items-center justify-center text-white border border-white "
           >
             Jo, ende
@@ -38,11 +68,30 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
     if (state.brideTradition) {
       return (
         <div className="flex flex-col w-full gap-8">
-          <div
-            onClick={() => dispatch({ setState: { brideTradition: true } })}
-            className="flex justify-center items-center text-white border-white border rounded-2xl h-24 w-24"
-          >
+          <div className="flex justify-center items-center text-white border-white border rounded-2xl h-24 w-24">
             PO
+          </div>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col ">
+              <div className="text-white ml-3">NGA</div>
+              <CustomInput
+                label="Shkruaj vendbanimin e dhëndërrit"
+                value={state.brideLocation || ""}
+                onChange={(value) =>
+                  dispatch({ setState: { brideLocation: value } })
+                }
+              ></CustomInput>
+            </div>
+            <div className="flex flex-col">
+              <div className="text-white ml-3">NË</div>
+              <CustomInput
+                label="Shkruaj vendbanimin e nusës"
+                value={state.groomLocation || ""}
+                onChange={(value) =>
+                  dispatch({ setState: { groomLocation: value } })
+                }
+              />
+            </div>
           </div>
         </div>
       );
@@ -77,7 +126,7 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
     <div className="flex flex-col h-full justify-between">
       <div className="flex flex-col ">
         <span className="text-white text-xs mb-4">
-          PYETJA <b>3 NGA 6</b> PYTJE NE TOTAL
+          PYETJA <b>4 NGA 6</b> PYTJE NE TOTAL
         </span>
         <h1 className="text-white  text-4xl font-bold  mb-8">
           A keni vendosur për sallën e dasmës tuaj?
