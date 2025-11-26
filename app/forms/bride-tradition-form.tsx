@@ -36,6 +36,7 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
     return (
       <div className="flex flex-col h-full items-center pt-12 gap-12">
         <img className="w-2/3 h-auto" src="/images/did-you-know2.png"></img>
+
         <DidYouKnow
           title="A e keni ditur se:"
           description="Ne i kushtojmë rendesi të veqant traditave shqiptare sikurse marrja e nuses!"

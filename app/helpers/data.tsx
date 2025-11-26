@@ -1,3 +1,5 @@
+import { IGlobalState } from "../contexts/GlobalContext";
+
 const unavailableDates = [];
 
 type EventItemId =
@@ -23,6 +25,13 @@ export interface IEventGroup {
   title: string;
 }
 
+export interface ISendEmailRequestBody {
+  state: IGlobalState;
+  totalPrice: number;
+  emailContent: string;
+
+  toEmail: string;
+}
 export const allEventGroups: IEventGroup[] = [
   {
     id: "0",
