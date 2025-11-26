@@ -62,7 +62,7 @@ const EventGroupWrapper: FunctionComponent<EventGroupWrapperProps> = ({
     );
   };
   return (
-    <div className="flex border-primary border-2 gap-8 rounded-4xl p-8 flex-col w-full">
+    <div className="flex border-primary/55 border-2 gap-8 rounded-4xl p-8 flex-col w-full bg-black/50">
       <div className="flex gap-2 items-center">
         {renderSelectionIcon()}
 

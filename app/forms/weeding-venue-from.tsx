@@ -91,8 +91,7 @@ const EventDateForm: React.FC<EventDateFormProps> = () => {
           PYETJA <b>3 NGA 6</b> PYTJE NE TOTAL
         </span>
         <h1 className="text-white  text-4xl   mb-8">
-          <b>A do të keni proceduren tradicionale</b> " Marrje nuseje me Krushqi
-          "
+          <b>A keni vendosur për</b> sallën e dasmës <b>tuaj?</b>
         </h1>
         {renderContent()}
       </div>

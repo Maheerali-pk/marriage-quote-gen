@@ -56,7 +56,7 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
           <div
             onClick={() => {
               dispatch({ setState: { brideTradition: false } });
-              router.push("/bride-tradition");
+              router.push("/church-or-mosque");
             }}
             className="flex cursor-pointer text-2xl aspect-square hover:scale-105 transition-all duration-300 h-32 w-32 rounded-2xl items-center justify-center text-white border border-white "
           >
@@ -128,8 +128,9 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
         <span className="text-white text-xs mb-4">
           PYETJA <b>4 NGA 6</b> PYTJE NE TOTAL
         </span>
-        <h1 className="text-white  text-4xl font-bold  mb-8">
-          A keni vendosur për sallën e dasmës tuaj?
+        <h1 className="text-white  text-4xl   mb-8">
+          <b>A do të keni proceduren tradicionale </b>" Marrje nuseje me Krushqi
+          "
         </h1>
         {renderContent()}
       </div>

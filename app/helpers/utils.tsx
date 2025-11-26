@@ -1,4 +1,5 @@
 import { IGlobalState } from "../contexts/GlobalContext";
+import { allEventGroups, allEventItems } from "./data";
 
 export const formatDate = (date: string) => {
   const dateObj = new Date(date);
@@ -7,6 +8,30 @@ export const formatDate = (date: string) => {
   const year = dateObj.getFullYear();
   return `${day}/${month}/${year}`;
 };
+
+export const getTotalPrice = (state: IGlobalState) => {
+  const enabledEventGroups = getEnabledEventGroups(state);
+  const filteredEventGroups = allEventGroups.filter(
+    (group) =>
+      enabledEventGroups.find((item) => item.evnetGroupId === group.id)?.enabled
+  );
+  return filteredEventGroups.reduce((acc, group) => {
+    const mySubItems = allEventItems.filter((item) =>
+      item.availableForEvents.includes(group.id)
+    );
+    const checkedSubItems = mySubItems.filter((item) =>
+      state.selections
+        ?.find((selection) => selection.eventGroupId === group.id)
+        ?.selectedItemIds.includes(item.id)
+    );
+    return (
+      acc +
+      checkedSubItems.reduce((acc, item) => acc + item.price, 0) *
+        (1 - group.discountPercentage / 100)
+    );
+  }, 0);
+};
+
 export const getEnabledEventGroups = (state: IGlobalState) => {
   const res = [
     { evnetGroupId: "0", enabled: false },
