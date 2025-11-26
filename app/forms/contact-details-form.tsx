@@ -16,7 +16,7 @@ const ContactDetailsForm: React.FC<ContactDetailsFormProps> = () => {
   const router = useRouter();
 
   const handleNext = async () => {
-    // Validate email and phone number
+    // Validate email and phone number are not empty
     if (!state.email || !state.phoneNumber) {
       setError("Ju lutem mbushni të gjitha fushat");
       return;
@@ -24,8 +24,19 @@ const ContactDetailsForm: React.FC<ContactDetailsFormProps> = () => {
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(state.email)) {
+    if (!emailRegex.test(state.email.trim())) {
       setError("Ju lutem shkruani një email adresë të vlefshme");
+      return;
+    }
+
+    // Validate phone number format (at least 6 digits, allows +, -, spaces, parentheses)
+    const phoneRegex =
+      /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/;
+    const phoneDigits = state.phoneNumber.replace(/\D/g, ""); // Remove all non-digits
+    if (phoneDigits.length < 6 || phoneDigits.length > 15) {
+      setError(
+        "Ju lutem shkruani një numër telefoni të vlefshëm (minimum 6 shifra)"
+      );
       return;
     }
 

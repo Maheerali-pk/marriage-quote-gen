@@ -152,17 +152,19 @@ export const imageUrlToDataUrl = async (imageUrl: string): Promise<string> => {
  * @returns Promise<string> - HTML email content
  */
 /**
- * Get all selected items as a flat list with their details
+ * Get selected items grouped by event group
  */
-const getAllSelectedItems = (state: IGlobalState) => {
+const getSelectedItemsByGroup = (state: IGlobalState) => {
   const enabledEventGroups = getEnabledEventGroups(state);
   const filteredEventGroups = allEventGroups.filter(
     (group) =>
       enabledEventGroups.find((item) => item.evnetGroupId === group.id)?.enabled
   );
 
-  const allItems: Array<{ name: string; price: number; finalPrice: number }> =
-    [];
+  const itemsByGroup: Array<{
+    groupTitle: string;
+    items: Array<{ name: string; price: number; finalPrice: number }>;
+  }> = [];
 
   filteredEventGroups.forEach((group) => {
     const mySubItems = allEventItems.filter((item) =>
@@ -174,24 +176,27 @@ const getAllSelectedItems = (state: IGlobalState) => {
         ?.selectedItemIds.includes(item.id)
     );
 
-    checkedSubItems.forEach((item) => {
-      allItems.push({
-        name: item.name,
-        price: item.price,
-        finalPrice: item.price * (1 - group.discountPercentage / 100),
+    if (checkedSubItems.length > 0) {
+      itemsByGroup.push({
+        groupTitle: group.title,
+        items: checkedSubItems.map((item) => ({
+          name: item.name,
+          price: item.price,
+          finalPrice: item.price * (1 - group.discountPercentage / 100),
+        })),
       });
-    });
+    }
   });
 
-  return allItems;
+  return itemsByGroup;
 };
 
 export const generateEmailContentClient = async (
   state: IGlobalState,
   emailBackground: string
 ): Promise<string> => {
-  // Get all selected items as a flat list
-  const selectedItems = getAllSelectedItems(state);
+  // Get selected items grouped by event group
+  const itemsByGroup = getSelectedItemsByGroup(state);
 
   // Generate simple email HTML without images
   const html = `
@@ -228,16 +233,26 @@ export const generateEmailContentClient = async (
             </td>
           </tr>
           ${
-            selectedItems.length > 0
+            itemsByGroup.length > 0
               ? `
           <tr>
             <td style="padding-top: 20px; padding-bottom: 20px;">
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
-                ${selectedItems
+                ${itemsByGroup
+                  .map(
+                    (group) => `
+                <tr>
+                  <td style="padding-bottom: 20px;">
+                    <h2 style="color: #d4aa00; font-size: 18px; margin: 0; padding-bottom: 10px; border-bottom: 1px solid rgba(212, 170, 0, 0.3); font-weight: bold;">
+                      ${group.groupTitle}
+                    </h2>
+                  </td>
+                </tr>
+                ${group.items
                   .map(
                     (item) => `
                 <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                  <td style="padding: 12px 0; padding-left: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
                       <tr>
                         <td style="color: #ffffff; font-size: 16px; font-weight: bold;">
@@ -250,6 +265,9 @@ export const generateEmailContentClient = async (
                     </table>
                   </td>
                 </tr>
+                `
+                  )
+                  .join("")}
                 `
                   )
                   .join("")}

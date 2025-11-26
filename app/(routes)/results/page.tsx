@@ -8,7 +8,7 @@ import WeddingVenueForm from "@/app/forms/weeding-venue-from";
 export default function WeddingVenuePage() {
   return (
     <div
-      className="h-full w-full flex flex-col md:flex-row px-4 py-4 md:px-12 md:py-20  overflow-auto"
+      className="h-full w-full flex flex-col md:flex-row px-4  md:px-12 md:py-20 py-10  gap-20 md:gap-80  overflow-auto"
       style={{
         backgroundImage: "url('/images/main-bg.png')",
         backgroundSize: "cover",
