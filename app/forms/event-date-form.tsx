@@ -1,11 +1,12 @@
 "use client";
-import CustomInput from "../components/custom-input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { ColorRing } from "react-loader-spinner";
 import { formatDate } from "../helpers/utils";
 import DidYouKnow from "../components/did-you-know";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface EventDateFormProps {}
 
@@ -85,24 +86,35 @@ const EventDateForm: React.FC<EventDateFormProps> = () => {
           <b>cila është dita juaj e dasmës</b>
         </h1>
         <div className="flex flex-col w-full gap-8">
-          <CustomInput
-            type="date"
-            value={state.eventDate}
-            onChange={(value) => {
-              dispatch({ setState: { eventDate: value } });
-              setError("");
-            }}
-            label="shkruaj daten e dasmes tuaj ketu"
-          />
+          <div className="custom-input-wrapper z-10 flex flex-col gap-1 py-1.5 pb-3 px-4 border-white border-2 rounded-2xl transition-all duration-300">
+            <label className="text-white text-base md:text-sm transition-colors duration-300">
+              shkruaj daten e dasmes tuaj ketu
+            </label>
+            <DatePicker
+              selected={state.eventDate ? new Date(state.eventDate) : null}
+              onChange={(date: Date | null) => {
+                if (date) {
+                  const formattedDate = date.toISOString().split("T")[0];
+                  dispatch({ setState: { eventDate: formattedDate } });
+                  setError("");
+                }
+              }}
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+              placeholderText="Zgjidhni datën"
+              className="w-full rounded-md text-2xl md:text-lg text-white bg-transparent outline-none border-none placeholder:text-white placeholder:opacity-50"
+              wrapperClassName="w-full"
+              calendarClassName="custom-datepicker-popover"
+              popperClassName="custom-datepicker-popper"
+              popperPlacement="bottom-start"
+            />
+          </div>
 
           {error && <div className="text-red-500 text-sm -mt-6">{error}</div>}
         </div>
       </div>
       <div className="flex w-full justify-between items-center">
-        <button
-          onClick={handleBack}
-          className="btn-back"
-        >
+        <button onClick={handleBack} className="btn-back">
           <svg
             className="w-5 h-5"
             fill="none"
@@ -118,10 +130,7 @@ const EventDateForm: React.FC<EventDateFormProps> = () => {
           </svg>
           KTHEHU
         </button>
-        <button
-          onClick={handleNext}
-          className="btn-primary w-fit"
-        >
+        <button onClick={handleNext} className="btn-primary w-fit">
           VAZHDO
         </button>
       </div>
