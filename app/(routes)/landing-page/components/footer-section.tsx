@@ -5,8 +5,10 @@ interface FooterSectionProps {}
 
 const FooterSection: React.FC<FooterSectionProps> = () => {
   return (
-    <div className="flex flex-col w-full bg-[linear-gradient(to_top,black_0%,transparent_100%)] mt-20 sm:mt-32 md:mt-40">
-      <div className="w-full sm:w-5/6 md:w-3/4 lg:w-1/2 mx-auto mb-20 sm:mb-32 md:mb-40 flex flex-col gap-6 sm:gap-8 md:gap-10 px-4">
+    <div className="flex flex-col w-full  mt-20 sm:mt-32 md:mt-40 relative">
+      <div className="bg-[linear-gradient(to_top,black_0%,transparent_100%)] w-full h-full absolute top-0 left-0"></div>
+
+      <div className="w-full sm:w-5/6 md:w-3/4 lg:w-1/2 mx-auto mb-20 sm:mb-32 md:mb-40 flex flex-col gap-6 sm:gap-8 md:gap-10 px-4 z-10">
         <motion.div
           className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex w-full justify-start"
           initial={{ opacity: 0, x: -50 }}
@@ -29,7 +31,7 @@ const FooterSection: React.FC<FooterSectionProps> = () => {
         </motion.div>
       </div>
       <motion.div
-        className="relative"
+        className="relative z-20"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -39,8 +41,8 @@ const FooterSection: React.FC<FooterSectionProps> = () => {
           src="/images/lp/footer.png"
           className="max-w-7xl mx-auto h-auto z-20 w-full px-4"
         />
-        <div className="bg-[linear-gradient(to_top,#29272A_0%,#29272a5a_100%)] w-full h-[80%] absolute bottom-0 left-0"></div>
       </motion.div>
+      <div className="bg-[linear-gradient(to_top,#29272A_0%,#29272a5a_100%)] w-full h-[60%] absolute bottom-0 left-0"></div>
     </div>
   );
 };
