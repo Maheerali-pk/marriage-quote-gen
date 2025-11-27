@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import ReviewItem from "./review-item";
 import { allReviews } from "@/app/helpers/data";
+import { motion } from "framer-motion";
 
 interface ReviewsSectionProps {}
 
@@ -13,18 +14,36 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
   return (
     <div className="w-full bg-white overflow-hidden">
       <div className="max-w-7xl flex flex-col py-10 sm:py-16 md:py-20 mx-auto px-4">
-        <div className="text-black text-2xl sm:text-3xl md:text-4xl">
+        <motion.div
+          className="text-black text-2xl sm:text-3xl md:text-4xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
           Çifte të mrekullueshme, meritojnë
           <br /> film madhështorë dasmëje.
-        </div>
+        </motion.div>
         <br />
-        <div className="text-black text-base sm:text-lg">
+        <motion.div
+          className="text-black text-base sm:text-lg"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           Shfleto disa nga <b>700+ Dasmat</b> që kemi realizuar,<br className="hidden sm:block"></br> ku
           secila tregon punën tonë dhe dashurinë e qiftit.<br></br>
           <br></br>
           <br></br>
-        </div>
-        <div className="w-full overflow-hidden">
+        </motion.div>
+        <motion.div
+          className="w-full overflow-hidden"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
           <Swiper
             modules={[FreeMode]}
             freeMode={true}
@@ -60,7 +79,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
