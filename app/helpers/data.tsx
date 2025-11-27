@@ -32,6 +32,48 @@ export interface ISendEmailRequestBody {
 
   toEmail: string;
 }
+export interface IReview {
+  image: string;
+  date: string;
+  groomName: string;
+  brideName: string;
+  location: string;
+  review: string[];
+}
+
+export const allReviews: IReview[] = [
+  {
+    image: "/images/lp/item1.png",
+    date: "25.07.2024",
+    groomName: "Blutrin",
+    brideName: "Kada",
+    location: "Vali Ranch, Gilan",
+    review: [
+      "Qifti Blutrin & Kada kishin dhuratë/surprizë nga Daja i tyre, realizimin e xhirimit te dasmës së tyre nga ne...",
+      "Pikërishtë për këtë arsyje ne i kushtuam rendesi të veqant detajeve dhe organizimit, andaj hapeni filmin që të shihni rezultatin",
+    ],
+  },
+  {
+    image: "/images/lp/item2.png",
+    date: "30.07.2024",
+    groomName: "Amdi",
+    brideName: "Endurina",
+    location: "Nita Palace, Shkup",
+    review: [
+      "Qifti Amdi & Endurina zgjedhen ZOOM Production nga Kosova, edhe pse ata janë nga Maqedonia... pse?",
+      "Sepse, ZOOM Production ishte ëndërra e tyre që u kthye në realitet, dhe se fal videove tona shumë media i quajtën qifti i Vitit.",
+    ],
+  },
+  {
+    image: "/images/lp/item3.png",
+    date: "05.08.2024",
+    groomName: "Ardi",
+    brideName: "Luljeta",
+    location: "Nita Palace, Shkup",
+    review: ["This is a review", "This is a review", "This is a review"],
+  },
+];
+
 export const allEventGroups: IEventGroup[] = [
   {
     id: "0",

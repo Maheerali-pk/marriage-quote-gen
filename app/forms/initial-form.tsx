@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import VideoItem from "../components/video-item";
 
 interface InitialFormProps {}
 
@@ -34,16 +35,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
           </div>
         </div>
         <div className="flex flex-col gap-8">
-          <div className="w-full relative">
-            <img
-              src="/images/video.png"
-              className="w-full h-auto  top-0 left-0 brightness-50"
-            ></img>
-            <img
-              className="w-20 h-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              src="/images/play-icon.png"
-            ></img>
-          </div>
+          <VideoItem></VideoItem>
           <div className="text-white text-xl md:text-lg">
             Hapi i parë i çdo dasmeje madhështore është planifikimi, andaj ne
             duam të dijmë çdo detaj rreth ditës tuaj më të veçantë në mënyrë që
@@ -55,10 +47,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
             apo minuta nga dita juaj.
           </div>
 
-          <button
-            onClick={handleNext}
-            className="btn-primary w-fit"
-          >
+          <button onClick={handleNext} className="btn-primary w-fit">
             DUA TË MARR OFERTËN TIME SPECIALE
           </button>
         </div>
