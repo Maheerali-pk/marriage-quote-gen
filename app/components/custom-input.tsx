@@ -26,7 +26,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
     >
       <label
         htmlFor={label}
-        className="text-white  text-base md:text-xs transition-colors duration-300"
+        className="text-white  text-base md:text-sm transition-colors duration-300"
       >
         {label}
       </label>
