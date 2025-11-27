@@ -25,6 +25,8 @@ export interface IEventGroup {
   title: string;
 }
 
+export const DECEMBER_DISCOUNT_PERCENTAGE = 10;
+
 export interface ISendEmailRequestBody {
   state: IGlobalState;
   totalPrice: number;
@@ -77,23 +79,23 @@ export const allReviews: IReview[] = [
 export const allEventGroups: IEventGroup[] = [
   {
     id: "0",
-    discountPercentage: 10,
+    discountPercentage: 0,
     title: "Procedura e marrjës së nusës me Krushqi",
   },
 
   {
     id: "1",
-    discountPercentage: 10,
+    discountPercentage: 0,
     title: `Procedura fetare " Ceremonia në Kishë "`,
   },
   {
     id: "2",
-    discountPercentage: 10,
+    discountPercentage: 0,
     title: `Lovestory + Set Fotografik`,
   },
   {
     id: "3",
-    discountPercentage: 10,
+    discountPercentage: 0,
     title: `Ceremonia ne Sallë/Restorant`,
   },
 ];

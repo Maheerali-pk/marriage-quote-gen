@@ -2,20 +2,17 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "../contexts/GlobalContext";
-import { generateEmailContentClient, getTotalPrice } from "../helpers/utils";
-import { emailBackground } from "../helpers/email-bg-image";
 import CustomInput from "../components/custom-input";
-import { allEventItems, ISendEmailRequestBody } from "../helpers/data";
+import { allEventItems } from "../helpers/data";
 
 interface ContactDetailsFormProps {}
 
 const ContactDetailsForm: React.FC<ContactDetailsFormProps> = () => {
   const [state, dispatch] = useGlobalContext();
   const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const handleNext = async () => {
+  const handleNext = () => {
     // Validate email and phone number are not empty
     if (!state.email || !state.phoneNumber) {
       setError("Ju lutem mbushni të gjitha fushat");
@@ -41,62 +38,26 @@ const ContactDetailsForm: React.FC<ContactDetailsFormProps> = () => {
     }
 
     setError("");
-    setLoading(true);
 
-    try {
-      // Generate email content on the frontend
-      const emailContent = await generateEmailContentClient(
-        state,
-        emailBackground
-      );
-      const totalPrice = getTotalPrice(state);
-
-      // Send the email
-      const sendResponse = await fetch("/api/send-mail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          state,
-          totalPrice,
-          emailContent,
-          toEmail: state.email,
-        } as ISendEmailRequestBody),
-      });
-
-      if (!sendResponse.ok) {
-        const errorData = await sendResponse.json();
-        throw new Error(errorData.error || "Failed to send email");
-      }
-
-      // Update selections and navigate to results
-      dispatch({
-        setState: {
-          selections: [
-            { eventGroupId: "0", selectedItemIds: [] },
-            { eventGroupId: "1", selectedItemIds: [] },
-            { eventGroupId: "2", selectedItemIds: [] },
-            { eventGroupId: "3", selectedItemIds: [] },
-          ].map((item) => ({
-            ...item,
-            selectedItemIds: allEventItems
-              .filter((itemInner) =>
-                itemInner.availableForEvents.includes(
-                  item.eventGroupId as string
-                )
-              )
-              .map((itemInner) => itemInner.id),
-          })),
-        },
-      });
-      router.push("/results");
-    } catch (error: any) {
-      setError(error.message || "Diçka shkoi keq. Ju lutem provoni përsëri.");
-      console.error("Error sending email:", error);
-    } finally {
-      setLoading(false);
-    }
+    // Update selections and navigate to results
+    dispatch({
+      setState: {
+        selections: [
+          { eventGroupId: "0", selectedItems: [] },
+          { eventGroupId: "1", selectedItems: [] },
+          { eventGroupId: "2", selectedItems: [] },
+          { eventGroupId: "3", selectedItems: [] },
+        ].map((item) => ({
+          ...item,
+          selectedItems: allEventItems
+            .filter((itemInner) =>
+              itemInner.availableForEvents.includes(item.eventGroupId as string)
+            )
+            .map((itemInner) => ({ itemId: itemInner.id, count: 1 })),
+        })),
+      },
+    });
+    router.push("/results");
   };
   return (
     <div className="flex flex-col h-full items-center justify-between  pt-10 gap-4 w-full">
@@ -138,12 +99,8 @@ const ContactDetailsForm: React.FC<ContactDetailsFormProps> = () => {
         </div>
       </div>
       <div className="flex w-full ">
-        <button
-          onClick={handleNext}
-          disabled={loading}
-          className="btn-primary w-full"
-        >
-          {loading ? "Duke dërguar..." : "HAP OFERTEN TIME"}
+        <button onClick={handleNext} className="btn-primary w-full">
+          HAP OFERTEN TIME
         </button>
       </div>
     </div>

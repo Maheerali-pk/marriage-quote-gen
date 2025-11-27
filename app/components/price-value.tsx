@@ -9,7 +9,7 @@ const PriceValue: FunctionComponent<PriceValueProps> = ({
   value,
   discountedValue,
 }) => {
-  if (!discountedValue) {
+  if (!discountedValue || discountedValue === value) {
     return <div className="text-white text-7xl">{value}€</div>;
   }
   return (

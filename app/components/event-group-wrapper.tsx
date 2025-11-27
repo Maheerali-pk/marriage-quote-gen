@@ -16,19 +16,19 @@ const EventGroupWrapper: FunctionComponent<EventGroupWrapperProps> = ({
   const mySubItems = allEventItems.filter((item) =>
     item.availableForEvents.includes(data.id)
   );
-  const checkedSubItems = mySubItems.filter((item) =>
-    state.selections
-      ?.find((selection) => selection.eventGroupId === data.id)
-      ?.selectedItemIds.includes(item.id)
-  );
   const myGroup = state.selections?.find(
     (selection) => selection.eventGroupId === data.id
   );
 
-  const isSelected = myGroup?.selectedItemIds.length === mySubItems.length;
+  const isSelected = myGroup?.selectedItems.length === mySubItems.length;
   const totalPrice = useMemo(() => {
-    return checkedSubItems.reduce((acc, item) => acc + item.price, 0);
-  }, [checkedSubItems]);
+    if (!myGroup) return 0;
+    return myGroup.selectedItems.reduce((acc, selectedItem) => {
+      const item = allEventItems.find((i) => i.id === selectedItem.itemId);
+      if (!item) return acc;
+      return acc + item.price * selectedItem.count;
+    }, 0);
+  }, [myGroup]);
   const totalDiscountedPrice = useMemo(() => {
     return totalPrice * (1 - data.discountPercentage / 100);
   }, [totalPrice, data.discountPercentage]);
@@ -76,13 +76,15 @@ const EventGroupWrapper: FunctionComponent<EventGroupWrapperProps> = ({
       >
         {mySubItems.map((item) => (
           <EventItem
+            showCount={data.id !== "2"}
             groupId={data.id}
-            className="max-h-[200px]"
+            className="min-h-[220px]"
             key={item.id}
             data={item}
           />
         ))}
       </div>
+
       <div className="flex w-full justify-end">
         <PriceValue value={totalPrice} discountedValue={totalDiscountedPrice} />
       </div>

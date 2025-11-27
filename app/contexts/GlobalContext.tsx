@@ -2,9 +2,14 @@
 import { createCustomContext } from "../helpers/CreateCustomContext";
 import { allEventItems } from "../helpers/data";
 
+export interface ISelectedItem {
+  itemId: string;
+  count: number;
+}
+
 export interface IEventItemSelection {
   eventGroupId: string;
-  selectedItemIds: string[];
+  selectedItems: ISelectedItem[];
 }
 export interface IGlobalState {
   brideName: string;
@@ -30,10 +35,10 @@ const initialState: IGlobalState = {
   eventType: "",
   eventDate: "",
   selections: [
-    { eventGroupId: "0", selectedItemIds: [] },
-    { eventGroupId: "1", selectedItemIds: [] },
-    { eventGroupId: "2", selectedItemIds: [] },
-    { eventGroupId: "3", selectedItemIds: [] },
+    { eventGroupId: "0", selectedItems: [] },
+    { eventGroupId: "1", selectedItems: [] },
+    { eventGroupId: "2", selectedItems: [] },
+    { eventGroupId: "3", selectedItems: [] },
   ],
 };
 function toggleEventGroupSelection(
@@ -50,11 +55,14 @@ function toggleEventGroupSelection(
   const myItems = allEventItems.filter((item) =>
     item.availableForEvents.includes(eventGroupId)
   );
-  const allItemsSelected = myGroup?.selectedItemIds.length === myItems.length;
+  const allItemsSelected = myGroup?.selectedItems.length === myItems.length;
   if (allItemsSelected) {
-    myGroup!.selectedItemIds = [];
+    myGroup!.selectedItems = [];
   } else {
-    myGroup!.selectedItemIds = myItems.map((item) => item.id);
+    myGroup!.selectedItems = myItems.map((item) => ({
+      itemId: item.id,
+      count: 1,
+    }));
   }
   console.log(newSelections, "Toggle Event Group Selection");
   return {
@@ -74,12 +82,38 @@ function toggleEventItemSelection(
   const myGroup = newSelections?.find(
     (selection) => selection.eventGroupId === eventGroupId
   );
-  if (myGroup?.selectedItemIds.includes(itemId)) {
-    myGroup.selectedItemIds = myGroup.selectedItemIds.filter(
-      (id) => id !== itemId
+  const existingItem = myGroup?.selectedItems.find(
+    (item) => item.itemId === itemId
+  );
+  if (existingItem) {
+    myGroup!.selectedItems = myGroup!.selectedItems.filter(
+      (item) => item.itemId !== itemId
     );
   } else {
-    myGroup?.selectedItemIds.push(itemId);
+    myGroup?.selectedItems.push({ itemId, count: 1 });
+  }
+  return {
+    ...state,
+    selections: newSelections,
+  };
+}
+
+function updateItemCount(
+  state: IGlobalState,
+  data: { eventGroupId: string; itemId: string; count: number }
+): IGlobalState {
+  const { eventGroupId, itemId, count } = data;
+  const newSelections: IEventItemSelection[] = JSON.parse(
+    JSON.stringify(state.selections)
+  );
+  const myGroup = newSelections?.find(
+    (selection) => selection.eventGroupId === eventGroupId
+  );
+  const existingItem = myGroup?.selectedItems.find(
+    (item) => item.itemId === itemId
+  );
+  if (existingItem && count > 0) {
+    existingItem.count = count;
   }
   return {
     ...state,
@@ -100,6 +134,7 @@ const functions = {
   setState,
   toggleEventItemSelection,
   toggleEventGroupSelection,
+  updateItemCount,
 };
 
 const { Context, Provider, useContextHook } = createCustomContext<

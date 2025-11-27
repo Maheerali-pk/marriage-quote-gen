@@ -1,12 +1,19 @@
 "use client";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useMemo, useState } from "react";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import {
   generateResultItem,
   getEnabledEventGroups,
   getTotalPrice,
+  getGroupPrice,
+  generateEmailContentClient,
 } from "../helpers/utils";
-import { allEventGroups } from "../helpers/data";
+import {
+  allEventGroups,
+  DECEMBER_DISCOUNT_PERCENTAGE,
+  ISendEmailRequestBody,
+} from "../helpers/data";
+import { emailBackground } from "../helpers/email-bg-image";
 import EventGroupWrapper from "./event-group-wrapper";
 
 interface ResultsRightSectionProps {}
@@ -17,11 +24,90 @@ const DASH_GAP_PX = 24;
 
 const ResultsRightSection: FunctionComponent<ResultsRightSectionProps> = () => {
   const [state, dispatch] = useGlobalContext();
+  const [emailLoading, setEmailLoading] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<string>("");
   const enabledEventGroups = getEnabledEventGroups(state);
   const filteredEventGroups = allEventGroups.filter(
     (group) =>
       enabledEventGroups.find((item) => item.evnetGroupId === group.id)?.enabled
   );
+
+  const logisticsPrice = 447; // Hardcoded static price for Logistics
+
+  const summaryItems = useMemo(() => {
+    const items = filteredEventGroups.map((group) => ({
+      name: group.title,
+      price: getGroupPrice(state, group.id),
+    }));
+
+    // Add Logistics item
+    items.push({
+      name: "Logjistika",
+      price: logisticsPrice,
+    });
+
+    return items;
+  }, [state, filteredEventGroups]);
+
+  const grandTotal = useMemo(() => {
+    return getTotalPrice(state) + logisticsPrice;
+  }, [state]);
+
+  const discountedTotal = useMemo(() => {
+    return grandTotal * (1 - DECEMBER_DISCOUNT_PERCENTAGE / 100);
+  }, [grandTotal]);
+
+  const handleEmailClick = async () => {
+    if (!state.email) {
+      setEmailError(
+        "Ju lutem shkruani email adresën tuaj në formularin e kontaktit"
+      );
+      return;
+    }
+
+    setEmailError("");
+    setEmailLoading(true);
+
+    try {
+      const emailContent = await generateEmailContentClient(
+        state,
+        emailBackground
+      );
+      const totalPrice = grandTotal;
+
+      const sendResponse = await fetch("/api/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          state,
+          totalPrice,
+          emailContent,
+          toEmail: state.email,
+        } as ISendEmailRequestBody),
+      });
+
+      if (!sendResponse.ok) {
+        const errorData = await sendResponse.json();
+        throw new Error(errorData.error || "Failed to send email");
+      }
+
+      alert("Email u dërgua me sukses!");
+    } catch (error: any) {
+      setEmailError(
+        error.message || "Diçka shkoi keq. Ju lutem provoni përsëri."
+      );
+      console.error("Error sending email:", error);
+    } finally {
+      setEmailLoading(false);
+    }
+  };
+
+  const handleWhatsAppClick = () => {
+    // Empty handler for now
+  };
+
   return (
     <div className="flex flex-col gap-8 text-white w-full border-primary/75 border-2 p-8 bg-black/30 rounded-4xl">
       <div className="flex flex-col gap-2 items-center justify-center w-full">
@@ -43,8 +129,99 @@ const ResultsRightSection: FunctionComponent<ResultsRightSectionProps> = () => {
           }px)`,
         }}
       />
-      <div className="flex  gap-2 items-center justify-end w-full text-white text-7xl">
-        Total: {getTotalPrice(state)}
+      <div className="flex flex-col gap-3 w-full">
+        {summaryItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between w-full border border-primary rounded-lg px-4 py-3 bg-black/50"
+          >
+            <div className="flex items-center gap-3">
+              <img
+                src="/images/success.png"
+                alt="checkmark"
+                className="w-6 h-6"
+              />
+              <span className="text-white text-lg">{item.name}</span>
+            </div>
+            <span className="text-white text-lg font-medium">
+              {item.price.toFixed(0)}€
+            </span>
+          </div>
+        ))}
+      </div>
+      <div
+        className="w-full h-[3px] mt-4"
+        style={{
+          backgroundImage: `repeating-linear-gradient(to right, rgba(255,255,255,0.7) 0, rgba(255,255,255,0.7) ${DASH_LENGTH_PX}px, transparent ${DASH_LENGTH_PX}px, transparent ${
+            DASH_LENGTH_PX + DASH_GAP_PX
+          }px)`,
+        }}
+      />
+      <div className="flex flex-col gap-4 w-full">
+        <div className="text-white text-base text-center">
+          Ne tani po ofërojmë{" "}
+          <span className="text-primary font-bold">
+            {DECEMBER_DISCOUNT_PERCENTAGE}% Zbritje
+          </span>{" "}
+          në Muajin Dhjetor, kliko mbi butonin kontakto Agendin nese deshironi
+          ta merrni oferten tuaj me zbritje apo edhe te diskutoni me shume rreth
+          ofertes tuaj
+        </div>
+        <div className="flex items-center justify-between w-full gap-8">
+          <div className="flex flex-col">
+            <div className="text-white text-sm mb-2">
+              Qmimi Final (Para Zbritjes)
+            </div>
+            <div className="text-white text-5xl font-bold line-through">
+              {grandTotal.toFixed(0)}€
+            </div>
+          </div>
+          <div className="flex flex-col items-end">
+            <div className="text-white text-sm mb-2">Qmimi me zbritje</div>
+            <div className="text-primary text-5xl font-bold">
+              {discountedTotal.toFixed(0)}€
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col gap-4 w-full">
+        <div className="text-white text-xl font-bold uppercase text-center">
+          KONTAKTO MENAGJERIN
+        </div>
+        <div className="flex gap-4 w-full">
+          <button
+            onClick={handleEmailClick}
+            disabled={emailLoading}
+            className="flex items-center justify-center gap-3 bg-black border-2 border-white rounded-lg px-6 py-3 text-blue-500 font-medium hover:bg-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex-1"
+          >
+            <svg
+              className="w-6 h-6 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+            <span>Me anë të E-mailit</span>
+          </button>
+          <button
+            onClick={handleWhatsAppClick}
+            className="flex items-center justify-center gap-3 bg-[#25D366] rounded-lg px-6 py-3 text-white font-medium hover:bg-[#20BA5A] transition-colors flex-1"
+          >
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+            </svg>
+            <span>Me anë të WhatsApp</span>
+          </button>
+        </div>
+        {emailError && (
+          <div className="text-red-500 text-sm text-center">{emailError}</div>
+        )}
       </div>
     </div>
   );

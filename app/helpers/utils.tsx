@@ -10,6 +10,27 @@ export const formatDate = (date: string) => {
   return `${day}/${month}/${year}`;
 };
 
+export const getGroupPrice = (state: IGlobalState, groupId: string): number => {
+  const group = allEventGroups.find((g) => g.id === groupId);
+  if (!group) return 0;
+
+  const groupSelection = state.selections?.find(
+    (selection) => selection.eventGroupId === groupId
+  );
+  if (!groupSelection) return 0;
+
+  const totalForGroup = groupSelection.selectedItems.reduce(
+    (sum, selectedItem) => {
+      const item = allEventItems.find((i) => i.id === selectedItem.itemId);
+      if (!item) return sum;
+      return sum + item.price * selectedItem.count;
+    },
+    0
+  );
+
+  return totalForGroup * (1 - group.discountPercentage / 100);
+};
+
 export const getTotalPrice = (state: IGlobalState) => {
   const enabledEventGroups = getEnabledEventGroups(state);
   const filteredEventGroups = allEventGroups.filter(
@@ -17,19 +38,7 @@ export const getTotalPrice = (state: IGlobalState) => {
       enabledEventGroups.find((item) => item.evnetGroupId === group.id)?.enabled
   );
   return filteredEventGroups.reduce((acc, group) => {
-    const mySubItems = allEventItems.filter((item) =>
-      item.availableForEvents.includes(group.id)
-    );
-    const checkedSubItems = mySubItems.filter((item) =>
-      state.selections
-        ?.find((selection) => selection.eventGroupId === group.id)
-        ?.selectedItemIds.includes(item.id)
-    );
-    return (
-      acc +
-      checkedSubItems.reduce((acc, item) => acc + item.price, 0) *
-        (1 - group.discountPercentage / 100)
-    );
+    return acc + getGroupPrice(state, group.id);
   }, 0);
 };
 
@@ -133,27 +142,46 @@ const getSelectedItemsByGroup = (state: IGlobalState) => {
 
   const itemsByGroup: Array<{
     groupTitle: string;
-    items: Array<{ name: string; price: number; finalPrice: number }>;
+    items: Array<{
+      name: string;
+      price: number;
+      finalPrice: number;
+      count: number;
+    }>;
   }> = [];
 
   filteredEventGroups.forEach((group) => {
-    const mySubItems = allEventItems.filter((item) =>
-      item.availableForEvents.includes(group.id)
+    const groupSelection = state.selections?.find(
+      (selection) => selection.eventGroupId === group.id
     );
-    const checkedSubItems = mySubItems.filter((item) =>
-      state.selections
-        ?.find((selection) => selection.eventGroupId === group.id)
-        ?.selectedItemIds.includes(item.id)
-    );
+    if (!groupSelection || groupSelection.selectedItems.length === 0) return;
 
-    if (checkedSubItems.length > 0) {
-      itemsByGroup.push({
-        groupTitle: group.title,
-        items: checkedSubItems.map((item) => ({
+    const items = groupSelection.selectedItems
+      .map((selectedItem) => {
+        const item = allEventItems.find((i) => i.id === selectedItem.itemId);
+        if (!item) return null;
+        return {
           name: item.name,
           price: item.price,
           finalPrice: item.price * (1 - group.discountPercentage / 100),
-        })),
+          count: selectedItem.count,
+        };
+      })
+      .filter(
+        (
+          item
+        ): item is {
+          name: string;
+          price: number;
+          finalPrice: number;
+          count: number;
+        } => item !== null
+      );
+
+    if (items.length > 0) {
+      itemsByGroup.push({
+        groupTitle: group.title,
+        items,
       });
     }
   });
@@ -226,10 +254,10 @@ export const generateEmailContentClient = async (
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
                       <tr>
                         <td style="color: #ffffff; font-size: 16px; font-weight: bold;">
-                          ${item.name}
+                          ${item.name}${item.count > 1 ? ` x${item.count}` : ""}
                         </td>
                         <td align="right" style="color: #d4aa00; font-size: 16px; font-weight: bold;">
-                          ${item.finalPrice.toFixed(2)}€
+                          ${(item.finalPrice * item.count).toFixed(2)}€
                         </td>
                       </tr>
                     </table>
