@@ -1,5 +1,10 @@
 import { IGlobalState } from "../contexts/GlobalContext";
-import { allEventGroups, allEventItems } from "./data";
+import {
+  allEventGroups,
+  allEventItems,
+  LOGISTICS_PRICE,
+  DECEMBER_DISCOUNT_PERCENTAGE,
+} from "./data";
 import { emailBackground } from "./email-bg-image";
 
 export const formatDate = (date: string) => {
@@ -269,6 +274,20 @@ export const generateEmailContentClient = async (
                 `
                   )
                   .join("")}
+                <tr>
+                  <td style="padding: 12px 0; padding-left: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
+                      <tr>
+                        <td style="color: #ffffff; font-size: 16px; font-weight: bold;">
+                          Logjistika
+                        </td>
+                        <td align="right" style="color: #d4aa00; font-size: 16px; font-weight: bold;">
+                          ${LOGISTICS_PRICE.toFixed(2)}€
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
               </table>
             </td>
           </tr>
@@ -279,9 +298,25 @@ export const generateEmailContentClient = async (
             <td style="padding-top: 20px; border-top: 2px solid rgba(212, 170, 0, 0.5);">
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100%;">
                 <tr>
-                  <td align="center" style="padding-top: 20px;">
-                    <p style="color: #d4aa00; font-size: 28px; font-weight: bold; margin: 0;">
-                      TOTAL: ${getTotalPrice(state).toFixed(2)}€
+                  <td align="center" style="padding-top: 20px; padding-bottom: 10px;">
+                    <p style="color: #ffffff; font-size: 16px; margin: 0; padding-bottom: 10px;">
+                      Qmimi Final (Para Zbritjes)
+                    </p>
+                    <p style="color: #ffffff; font-size: 32px; font-weight: bold; margin: 0; text-decoration: line-through;">
+                      ${(getTotalPrice(state) + LOGISTICS_PRICE).toFixed(2)}€
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding-top: 10px; padding-bottom: 10px;">
+                    <p style="color: #d4aa00; font-size: 16px; margin: 0; padding-bottom: 10px; font-weight: bold;">
+                      ${DECEMBER_DISCOUNT_PERCENTAGE}% Zbritje në Muajin Dhjetor
+                    </p>
+                    <p style="color: #d4aa00; font-size: 32px; font-weight: bold; margin: 0;">
+                      Qmimi me zbritje: ${(
+                        (getTotalPrice(state) + LOGISTICS_PRICE) *
+                        (1 - DECEMBER_DISCOUNT_PERCENTAGE / 100)
+                      ).toFixed(2)}€
                     </p>
                   </td>
                 </tr>

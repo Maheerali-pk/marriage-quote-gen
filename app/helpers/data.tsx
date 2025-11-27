@@ -26,6 +26,7 @@ export interface IEventGroup {
 }
 
 export const DECEMBER_DISCOUNT_PERCENTAGE = 10;
+export const LOGISTICS_PRICE = 447;
 
 export interface ISendEmailRequestBody {
   state: IGlobalState;

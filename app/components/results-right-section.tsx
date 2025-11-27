@@ -12,6 +12,7 @@ import {
   allEventGroups,
   DECEMBER_DISCOUNT_PERCENTAGE,
   ISendEmailRequestBody,
+  LOGISTICS_PRICE,
 } from "../helpers/data";
 import { emailBackground } from "../helpers/email-bg-image";
 import EventGroupWrapper from "./event-group-wrapper";
@@ -32,8 +33,6 @@ const ResultsRightSection: FunctionComponent<ResultsRightSectionProps> = () => {
       enabledEventGroups.find((item) => item.evnetGroupId === group.id)?.enabled
   );
 
-  const logisticsPrice = 447; // Hardcoded static price for Logistics
-
   const summaryItems = useMemo(() => {
     const items = filteredEventGroups.map((group) => ({
       name: group.title,
@@ -43,14 +42,14 @@ const ResultsRightSection: FunctionComponent<ResultsRightSectionProps> = () => {
     // Add Logistics item
     items.push({
       name: "Logjistika",
-      price: logisticsPrice,
+      price: LOGISTICS_PRICE,
     });
 
     return items;
   }, [state, filteredEventGroups]);
 
   const grandTotal = useMemo(() => {
-    return getTotalPrice(state) + logisticsPrice;
+    return getTotalPrice(state) + LOGISTICS_PRICE;
   }, [state]);
 
   const discountedTotal = useMemo(() => {
