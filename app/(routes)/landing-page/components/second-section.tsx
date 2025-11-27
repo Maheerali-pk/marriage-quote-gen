@@ -46,8 +46,13 @@ const SecondSection: React.FC<SecondSectionProps> = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <div className="text-white text-center text-xl sm:text-2xl md:text-3xl">WELCOME TO</div>
-          <img src="/images/logo.png" className="h-32 sm:h-40 md:h-52 lg:h-60"></img>
+          <div className="text-white text-center text-xl sm:text-2xl md:text-3xl">
+            WELCOME TO
+          </div>
+          <img
+            src="/images/logo.png"
+            className="h-32 sm:h-40 md:h-52 lg:h-60"
+          ></img>
         </motion.div>
         <motion.img
           src={"/images/lp/reels-list.png"}

@@ -32,8 +32,9 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Shfleto disa nga <b>700+ Dasmat</b> që kemi realizuar,<br className="hidden sm:block"></br> ku
-          secila tregon punën tonë dhe dashurinë e qiftit.<br></br>
+          Shfleto disa nga <b>700+ Dasmat</b> që kemi realizuar,
+          <br className="hidden sm:block"></br> ku secila tregon punën tonë dhe
+          dashurinë e qiftit.<br></br>
           <br></br>
           <br></br>
         </motion.div>
@@ -67,7 +68,11 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
             }}
           >
             {allReviews.map((review, index) => (
-              <SwiperSlide key={index} style={{ width: "calc(100vw - 2rem)", maxWidth: "600px" }} className="!w-[calc(100vw-2rem)] sm:!w-[500px] md:!w-[600px]">
+              <SwiperSlide
+                key={index}
+                style={{ width: "calc(100vw - 2rem)", maxWidth: "600px" }}
+                className="!w-[calc(100vw-2rem)] sm:!w-[500px] md:!w-[600px]"
+              >
                 <ReviewItem
                   image={review.image}
                   date={review.date}

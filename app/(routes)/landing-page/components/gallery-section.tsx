@@ -25,21 +25,21 @@ const GallerySection: React.FC<GallerySectionProps> = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Galeria ynë me mbi <b>7.6 Milion Shkrepje</b>, e ketu <br className="hidden sm:block" /> gjeni
-          disa prej tyre...
+          Galeria ynë me mbi <b>7.6 Milion Shkrepje</b>, e ketu{" "}
+          <br className="hidden sm:block" /> gjeni disa prej tyre...
           <br></br>
           <br></br>
         </motion.div>
       </div>
       <motion.div
         className="w-full overflow-x-auto overflow-y-visible"
-        style={{ overflowX: 'auto', overflowY: 'visible' }}
+        style={{ overflowX: "auto", overflowY: "visible" }}
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 1, delay: 0.3 }}
       >
-        <div className="w-[200vw]" style={{ width: '200vw' }}>
+        <div className="w-[200vw]" style={{ width: "200vw" }}>
           <img
             src="/images/lp/gallery.png"
             alt="gallery"

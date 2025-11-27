@@ -1,35 +1,6 @@
 import { IGlobalState } from "../contexts/GlobalContext";
 import { allEventGroups, allEventItems } from "./data";
 import { emailBackground } from "./email-bg-image";
-import { createCanvas, loadImage } from "canvas";
-import path from "path";
-
-/**
- * Converts an image file to a data URL using canvas
- * @param imagePath - Path to the image file
- * @returns Promise<string> - Data URL of the image
- */
-export const imageToDataUrl = async (imagePath: string): Promise<string> => {
-  try {
-    // Load the image
-    const image = await loadImage(imagePath);
-
-    // Create a canvas with the same dimensions as the image
-    const canvas = createCanvas(image.width, image.height);
-    const ctx = canvas.getContext("2d");
-
-    // Draw the image onto the canvas
-    ctx.drawImage(image, 0, 0);
-
-    // Convert canvas to data URL
-    const dataUrl = canvas.toDataURL("image/png");
-
-    return dataUrl;
-  } catch (error) {
-    console.error("Error converting image to data URL:", error);
-    throw error;
-  }
-};
 
 export const formatDate = (date: string) => {
   const dateObj = new Date(date);
@@ -300,13 +271,13 @@ export const generateEmailContentClient = async (
   return html;
 };
 
-// Server-side version (uses Node.js canvas)
+// Browser-compatible version (uses HTML canvas)
 export const generateEmailContent = async (
   state: IGlobalState
 ): Promise<string> => {
-  // Convert logo to data URL using canvas
-  const logoPath = path.join(process.cwd(), "public", "images", "logo.png");
-  const logoDataUrl = await imageToDataUrl(logoPath);
+  // Convert logo to data URL using HTML canvas
+  const logoUrl = "/images/logo.png";
+  const logoDataUrl = await imageUrlToDataUrl(logoUrl);
 
   // Generate email HTML with inline styles (email-compatible)
   const html = `
