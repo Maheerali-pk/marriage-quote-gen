@@ -65,7 +65,6 @@ export const getTotalPrice = (state: IGlobalState) => {
 export const getEnabledEventGroups = (state: IGlobalState) => {
   const res = [
     { evnetGroupId: "0", enabled: false },
-
     { evnetGroupId: "1", enabled: false },
     { evnetGroupId: "2", enabled: true },
     { evnetGroupId: "3", enabled: false },

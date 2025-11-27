@@ -20,16 +20,16 @@ const InitialForm: React.FC<InitialFormProps> = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[max-content_auto] gap-10 w-full z-10 md:px-40 px-8 pt-40">
+      <div className="grid grid-cols-1 grid-rows-[min-content_auto] md:grid-cols-[max-content_auto] gap-10 md:gap-10 w-full z-10 md:px-40 px-8 pt-10 md:pt-40 ">
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2 text-white text-5xl">
             A jeni gati
           </div>
 
-          <div className="text-primary text-9xl text-shadow-lg text-shadow-primary">
+          <div className="text-primary text-8xl md:text-9xl text-shadow-lg text-shadow-primary">
             të shkëlqeni
           </div>
-          <div className="text-white text-3xl ml-56">
+          <div className="text-white text-3xl md:ml-56">
             në filmin e dasmës suaj
           </div>
         </div>
@@ -44,7 +44,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
               src="/images/play-icon.png"
             ></img>
           </div>
-          <div className="text-white">
+          <div className="text-white text-xl md:text-lg">
             Hapi i parë i çdo dasmeje madhështore është planifikimi, andaj ne
             duam të dijmë çdo detaj rreth ditës tuaj më të veçantë në mënyrë që
             t'iu ofrojmë një eksperiencë unike dhe të pa harruar.
@@ -57,7 +57,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
 
           <button
             onClick={handleNext}
-            className="bg-[rgba(212,170,0,1)] hover:bg-[rgba(212,170,0,0.8)] cursor-pointer transition-all duration-300 w-fit font-bold text-white text-2xl px-8 py-4 rounded-2xl"
+            className="btn-primary w-fit"
           >
             DUA TË MARR OFERTËN TIME SPECIALE
           </button>

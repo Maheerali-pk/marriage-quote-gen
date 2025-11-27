@@ -141,7 +141,7 @@ const ContactDetailsForm: React.FC<ContactDetailsFormProps> = () => {
         <button
           onClick={handleNext}
           disabled={loading}
-          className="bg-primary w-full hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-300 font-bold text-white text-2xl px-8 py-4 rounded-2xl"
+          className="btn-primary w-full"
         >
           {loading ? "Duke dërguar..." : "HAP OFERTEN TIME"}
         </button>

@@ -15,6 +15,22 @@ const ChurchOrMosqueForm: React.FC<ChurchOrMosqueFormProps> = () => {
   const handleNext = () => {
     router.push("/member-count");
   };
+
+  const handleBack = () => {
+    if (state.buildingType !== undefined) {
+      // If option is selected, unselect it
+      dispatch({
+        setState: {
+          buildingType: undefined,
+          mosqueLocation: "",
+          churchLocation: "",
+        },
+      });
+    } else {
+      // If no option selected, navigate back
+      router.push("/bride-tradition");
+    }
+  };
   const renderContent = () => {
     if (state.buildingType === undefined) {
       return (
@@ -121,17 +137,36 @@ const ChurchOrMosqueForm: React.FC<ChurchOrMosqueFormProps> = () => {
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="flex flex-col ">
-        <span className="text-white text-xs mb-4">
+        <span className="text-white text-base mb-4">
           PYETJA <b>5 NGA 6</b> PYTJE NE TOTAL
         </span>
         <h1 className="text-white text-4xl mb-8">{title}</h1>
         {renderContent()}
       </div>
-      <div className="flex w-full justify-end">
+      <div className="flex w-full justify-between items-center">
+        <button
+          onClick={handleBack}
+          className="btn-back"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          KTHEHU
+        </button>
         {showButton && (
           <button
             onClick={handleNext}
-            className="bg-[rgba(212,170,0,1)] hover:bg-[rgba(212,170,0,0.8)] cursor-pointer transition-all duration-300 w-fit font-bold text-white text-2xl px-8 py-4 rounded-2xl"
+            className="btn-primary w-fit"
           >
             VAZHDO
           </button>

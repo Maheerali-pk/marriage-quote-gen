@@ -21,10 +21,14 @@ const MemberCountForm: React.FC<MemberCountFormProps> = () => {
     router.push("/processing");
   };
 
+  const handleBack = () => {
+    router.push("/church-or-mosque");
+  };
+
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="flex flex-col ">
-        <span className="text-white text-xs mb-4">
+        <span className="text-white text-base mb-4">
           PYETJA <b>5 NGA 6</b> PYTJE NE TOTAL
         </span>
         <h1 className="text-white text-4xl mb-8">
@@ -43,6 +47,27 @@ const MemberCountForm: React.FC<MemberCountFormProps> = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="flex w-full justify-start">
+        <button
+          onClick={handleBack}
+          className="btn-back"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          KTHEHU
+        </button>
       </div>
     </div>
   );

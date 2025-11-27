@@ -39,6 +39,10 @@ const EventDateForm: React.FC<EventDateFormProps> = () => {
       router.push("/date-available-success");
     }, 3000);
   };
+
+  const handleBack = () => {
+    router.push("/event-type");
+  };
   if (loading) {
     return (
       <div className="flex flex-col h-full justify-between">
@@ -73,7 +77,7 @@ const EventDateForm: React.FC<EventDateFormProps> = () => {
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="flex flex-col ">
-        <span className="text-white text-xs mb-4">
+        <span className="text-white text-base mb-4">
           PYETJA <b>2 NGA 6</b> PYTJE NE TOTAL
         </span>
         <h1 className="text-white  text-4xl  mb-8">
@@ -94,10 +98,29 @@ const EventDateForm: React.FC<EventDateFormProps> = () => {
           {error && <div className="text-red-500 text-sm -mt-6">{error}</div>}
         </div>
       </div>
-      <div className="flex w-full justify-end">
+      <div className="flex w-full justify-between items-center">
+        <button
+          onClick={handleBack}
+          className="btn-back"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          KTHEHU
+        </button>
         <button
           onClick={handleNext}
-          className="bg-[rgba(212,170,0,1)] hover:bg-[rgba(212,170,0,0.8)] cursor-pointer transition-all duration-300 w-fit font-bold text-white text-2xl px-8 py-4 rounded-2xl"
+          className="btn-primary w-fit"
         >
           VAZHDO
         </button>
