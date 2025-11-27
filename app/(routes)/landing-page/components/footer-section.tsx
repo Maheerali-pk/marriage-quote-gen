@@ -2,12 +2,12 @@ interface FooterSectionProps {}
 
 const FooterSection: React.FC<FooterSectionProps> = () => {
   return (
-    <div className="flex flex-col w-full bg-[linear-gradient(to_top,black_0%,transparent_100%)] mt-40">
-      <div className="w-1/2 mx-auto mb-40 flex flex-col gap-10">
-        <div className="text-black text-5xl font-bold flex w-full justify-start">
+    <div className="flex flex-col w-full bg-[linear-gradient(to_top,black_0%,transparent_100%)] mt-20 sm:mt-32 md:mt-40">
+      <div className="w-full sm:w-5/6 md:w-3/4 lg:w-1/2 mx-auto mb-20 sm:mb-32 md:mb-40 flex flex-col gap-6 sm:gap-8 md:gap-10 px-4">
+        <div className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold flex w-full justify-start">
           Dhe si perfundim...
         </div>
-        <div className="text-black text-2xl flex w-full justify-end">
+        <div className="text-black text-lg sm:text-xl md:text-2xl flex w-full justify-end">
           <div className="text-left flex justify-left">
             ju pranoni momentet tuaja te<br></br> paketuara në mënyrë Premium...{" "}
           </div>
@@ -16,7 +16,7 @@ const FooterSection: React.FC<FooterSectionProps> = () => {
       <div className="relative">
         <img
           src="/images/lp/footer.png"
-          className="max-w-7xl mx-auto h-auto z-20"
+          className="max-w-7xl mx-auto h-auto z-20 w-full px-4"
         />
         <div className="bg-[linear-gradient(to_top,#29272A_0%,#29272a5a_100%)] w-full h-[80%] absolute bottom-0 left-0"></div>
       </div>
