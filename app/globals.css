@@ -146,6 +146,39 @@ html {
   background-color: rgba(212, 170, 0, 1);
 }
 
+/* Small variant of primary button */
+.btn-primary.btn-small {
+  font-size: 1rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(212, 170, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary.btn-small:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(212, 170, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary.btn-small:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary.btn-small:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 2px 6px rgba(212, 170, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary.btn-small:active::before {
+  width: 150px;
+  height: 150px;
+}
+
+.btn-primary.btn-small:disabled:hover {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Custom Input with professional focus effects */
 .custom-input-wrapper {
   position: relative;

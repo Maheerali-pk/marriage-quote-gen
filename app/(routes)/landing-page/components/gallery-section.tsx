@@ -1,5 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/autoplay";
 
 interface GallerySectionProps {}
 
@@ -30,23 +35,44 @@ const GallerySection: React.FC<GallerySectionProps> = () => {
           <br></br>
           <br></br>
         </motion.div>
+        <motion.div
+          className="w-full overflow-hidden -mx-4"
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          <Swiper
+            modules={[FreeMode, Autoplay]}
+            freeMode={true}
+            spaceBetween={0}
+            slidesPerView="auto"
+            loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            speed={3000}
+            className="!pb-10"
+            style={{ width: "100%", overflow: "visible" }}
+          >
+            <SwiperSlide style={{ width: "200vw" }} className="!w-[200vw]">
+              <img
+                src="/images/lp/gallery.png"
+                alt="gallery"
+                className="w-full h-auto"
+              />
+            </SwiperSlide>
+            <SwiperSlide style={{ width: "200vw" }} className="!w-[200vw]">
+              <img
+                src="/images/lp/gallery.png"
+                alt="gallery"
+                className="w-full h-auto"
+              />
+            </SwiperSlide>
+          </Swiper>
+        </motion.div>
       </div>
-      <motion.div
-        className="w-full overflow-x-auto overflow-y-visible"
-        style={{ overflowX: "auto", overflowY: "visible" }}
-        initial={{ opacity: 0, x: -100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1, delay: 0.3 }}
-      >
-        <div className="w-[200vw]" style={{ width: "200vw" }}>
-          <img
-            src="/images/lp/gallery.png"
-            alt="gallery"
-            className="w-full h-auto"
-          />
-        </div>
-      </motion.div>
     </div>
   );
 };
