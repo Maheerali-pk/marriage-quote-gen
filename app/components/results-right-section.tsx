@@ -108,7 +108,7 @@ const ResultsRightSection: FunctionComponent<ResultsRightSectionProps> = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 text-white w-full border-primary/75 border-2 p-8 bg-black/30 rounded-4xl">
+    <div className="flex flex-col gap-8 text-white w-full border-primary/75 border-2 p-6 md:p-8 bg-black/30 rounded-4xl">
       <div className="flex flex-col gap-2 items-center justify-center w-full">
         <div className="flex text-6xl">Oferta Përmban:</div>
         <div className="text-lg">

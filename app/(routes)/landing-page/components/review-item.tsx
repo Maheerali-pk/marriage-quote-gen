@@ -26,7 +26,12 @@ const ReviewItem: React.FC<ReviewItemProps> = ({
         {Array(5)
           .fill(0)
           .map((_, idx) => (
-            <img key={idx} src="/images/lp/star.png" alt="star" className="w-3 h-3 sm:w-4 sm:h-4" />
+            <img
+              key={idx}
+              src="/images/lp/star.png"
+              alt="star"
+              className="w-3 h-3 sm:w-4 sm:h-4"
+            />
           ))}
       </div>
       <div className="flex flex-col gap-1 sm:gap-2">
@@ -45,7 +50,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({
         ))}
       </div>
       <button
-        className="btn-primary w-full sm:w-fit !rounded-full text-sm sm:text-base"
+        className="btn-primary w-full sm:w-fit !rounded-full !text-base md:text-inherit "
         onClick={() => router.push("/initial")}
       >
         REZERVO DASMË TË TILLË

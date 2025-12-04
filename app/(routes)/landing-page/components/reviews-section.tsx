@@ -46,23 +46,27 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <Swiper
-            modules={[FreeMode]}
-            freeMode={true}
             spaceBetween={20}
-            slidesPerView="auto"
+            slidesPerView={1.2}
+            freeMode={true}
+            modules={[FreeMode]}
             className="!pb-10"
             style={{ width: "100%", overflow: "visible" }}
             breakpoints={{
               0: {
+                slidesPerView: 1.5,
                 spaceBetween: 15,
               },
               640: {
+                slidesPerView: "auto",
                 spaceBetween: 20,
               },
               768: {
+                slidesPerView: "auto",
                 spaceBetween: 25,
               },
               1024: {
+                slidesPerView: "auto",
                 spaceBetween: 30,
               },
             }}
@@ -70,8 +74,8 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
             {allReviews.map((review, index) => (
               <SwiperSlide
                 key={index}
-                style={{ width: "calc(100vw - 2rem)", maxWidth: "600px" }}
-                className="!w-[calc(100vw-2rem)] sm:!w-[500px] md:!w-[600px]"
+                style={{ maxWidth: "600px" }}
+                className="sm:!w-[500px] md:!w-[600px]"
               >
                 <ReviewItem
                   image={review.image}

@@ -62,16 +62,17 @@ const EventGroupWrapper: FunctionComponent<EventGroupWrapperProps> = ({
     );
   };
   return (
-    <div className="flex border-primary/55 border-2 gap-8 rounded-4xl p-8 flex-col w-full bg-black/50">
+    <div className="flex border-primary/55 border-2 gap-8 rounded-4xl md:p-8 p-4 flex-col w-full bg-black/50">
       <div className="flex gap-2 items-center">
         {renderSelectionIcon()}
 
         <div className="text-white text-2xl">{data.title}</div>
       </div>
       <div
-        className={classNames("grid gap-4 w-full", {
-          "grid-cols-3": data.id === "0" || data.id === "1" || data.id === "3",
-          "grid-cols-2": data.id === "2",
+        className={classNames("grid gap-y-8 gap-x-4 grid-cols-2  w-full", {
+          "md:grid-cols-3":
+            data.id === "0" || data.id === "1" || data.id === "3",
+          "md:grid-cols-2": data.id === "2",
         })}
       >
         {mySubItems.map((item) => (

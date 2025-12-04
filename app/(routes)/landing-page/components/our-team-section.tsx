@@ -33,16 +33,16 @@ const otherMembersImages = Array.from({ length: 10 }, (_, index) => {
 
 const OurTeamSection: React.FC<OurTeamSectionProps> = () => {
   return (
-    <div className="bg-[#1f1e1b] w-full h-full py-40">
+    <div className="bg-[#1f1e1b] w-full h-full md:py-40 py-10">
       <div className="max-w-7xl mx-auto flex flex-col gap-10 px-4">
-        <h3 className="text-white text-6xl  font-bold">
+        <h3 className="text-white text-4xl  md:text-7xl  font-bold">
           Kush qëndron mbrapa suksesit të ZOOM Production...
         </h3>
         <div className="w-full h-[40rem] rounded-4xl relative overflow-hidden">
           <img
             src="/images/lp/team/img1.png"
             alt="our-team"
-            className="w-full h-full object-cover sm:object-[0px_-200px] absolute top-0 left-0"
+            className="w-full h-full md:object-cover md:object-[0px_-150px] object-cover absolute top-0 left-0"
           />
           <div className="absolute bottom-4 left-4 pr-4 sm:bottom-10 sm:left-10 sm:pr-10 sm:w-1/2 w-full flex flex-col z-30 gap-6">
             <div className="flex flex-col gap-3">

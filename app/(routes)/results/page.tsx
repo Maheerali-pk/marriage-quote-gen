@@ -8,7 +8,7 @@ import WeddingVenueForm from "@/app/forms/weeding-venue-from";
 export default function WeddingVenuePage() {
   return (
     <div
-      className="h-full w-full flex flex-col md:flex-row px-4  md:px-12 md:py-20 py-10  gap-20 md:gap-80  overflow-auto"
+      className="min-h-screen w-full flex flex-col md:flex-row px-4  md:px-12 md:py-20 py-6 pt-10  gap-10 md:gap-10  overflow-auto relative"
       style={{
         backgroundImage: "url('/images/main-bg.png')",
         backgroundSize: "cover",
@@ -21,7 +21,7 @@ export default function WeddingVenuePage() {
         <ResultsLeftSection></ResultsLeftSection>
       </div>
 
-      <div className="flex gap-8 w-full h-full justify-start items-start z-10">
+      <div className="flex gap-8 w-full  justify-start items-start z-10">
         <ResultsRightSection></ResultsRightSection>
       </div>
     </div>

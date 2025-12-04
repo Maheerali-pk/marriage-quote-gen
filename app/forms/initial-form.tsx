@@ -11,7 +11,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
   };
   return (
     <div
-      className="h-full w-full flex justify-center"
+      className="min-h-screen w-screen flex justify-center  md:items-center !overflow-auto relative"
       style={{
         backgroundImage: "url('/images/main-bg.png')",
         backgroundSize: "cover",
@@ -21,7 +21,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
 
-      <div className="grid grid-cols-1 grid-rows-[min-content_auto] md:grid-rows-1 md:grid-cols-[1fr_1fr] gap-10 md:gap-10 w-full z-10 md:px-40 px-8 pt-10 md:pt-40 ">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-10 md:gap-10 w-full z-10 md:px-40 px-8 pt-10  md:pt-40">
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2 text-white text-5xl">
             A jeni gati
@@ -34,7 +34,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
             në filmin e dasmës suaj
           </div>
         </div>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 pb-10 mb:pb-0">
           <VideoItem></VideoItem>
           <div className="text-white text-xl md:text-lg">
             Hapi i parë i çdo dasmeje madhështore është planifikimi, andaj ne
