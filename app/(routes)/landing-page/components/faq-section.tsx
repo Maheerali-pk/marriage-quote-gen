@@ -45,7 +45,7 @@ export function FaqSection() {
           Pytjët që na bëhen më <br />
           së shpeshti
         </h2>
-        <div className="text-sm text-white mb-12">
+        <div className="text-lg text-white mb-12">
           Hap pyetjët të cilat mund ti keni edhe ju, dhe <br /> kuptoni direkt
           atë që ju duhët juve
         </div>

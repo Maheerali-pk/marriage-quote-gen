@@ -18,7 +18,7 @@ export function WeddingCountriesSection() {
                 “Dasma të realizuara në +7<br></br> Vende të Botës”
               </b>
             </h2>
-            <div className="text-base text-white">
+            <div className="text-lg text-white">
               ZOOM Production realizon dasma në Kosovë, Shqipëri, Maqedoni,
               Zvicër, Gjermani, Itali, Greqi dhe në shumë destinacione të tjera
               në Evropë.

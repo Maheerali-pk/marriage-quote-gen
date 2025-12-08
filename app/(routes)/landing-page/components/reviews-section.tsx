@@ -193,14 +193,14 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
               }, 100);
             }}
             spaceBetween={20}
-            slidesPerView={1.2}
+            slidesPerView={1}
             freeMode={true}
             modules={[FreeMode]}
             className="!pb-10"
             style={{ width: "100%", overflow: "visible" }}
             breakpoints={{
               0: {
-                slidesPerView: 1.5,
+                slidesPerView: 1,
                 spaceBetween: 15,
               },
               640: {
