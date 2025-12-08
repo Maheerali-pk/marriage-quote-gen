@@ -11,7 +11,7 @@ export function SocialMediaRecordsSection() {
                 <br /> Ndjekës në Instagram”
               </b>
             </h2>
-            <div className="text-base text-white">
+            <div className="text-lg text-white">
               ZOOM Production është produksioni i parë shqiptar i dasmave që ka
               arritur 50+ milionë shikime në të gjitha platformat digjitale,
               duke krijuar një ndikim të padiskutueshëm në industrinë e
