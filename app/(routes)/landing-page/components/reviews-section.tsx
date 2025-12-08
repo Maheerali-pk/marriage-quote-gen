@@ -39,18 +39,8 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
     let resizeHandler: (() => void) | null = null;
     let refreshTimeout: NodeJS.Timeout | null = null;
 
-    // Check if mobile (less than 640px)
-    const isMobile = () => window.innerWidth < 640;
-
     // Wait for Swiper to be fully initialized and calculate dimensions
     const initScrollTrigger = () => {
-      // Skip ScrollTrigger on mobile - just use simple Swiper
-      if (isMobile()) {
-        // Ensure Swiper is enabled for touch on mobile
-        swiper.allowTouchMove = true;
-        return;
-      }
-
       // Force Swiper to recalculate dimensions
       swiper.update();
       swiper.updateSlides();
@@ -113,27 +103,17 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
       ScrollTrigger.refresh();
     };
 
-    // Handle resize - kill ScrollTrigger on mobile, recreate on desktop
+    // Handle resize - refresh ScrollTrigger on all screen sizes
     resizeHandler = () => {
-      if (isMobile()) {
-        // Kill ScrollTrigger if we're on mobile
-        if (scrollTrigger) {
-          scrollTrigger.kill();
-          scrollTrigger = null;
+      // Reinitialize ScrollTrigger if needed
+      if (!scrollTrigger && swiper) {
+        swiper.update();
+        const newMaxTranslate = Math.abs(swiper.maxTranslate());
+        if (newMaxTranslate > 0 && !isNaN(newMaxTranslate)) {
+          initScrollTrigger();
         }
-        // Ensure Swiper is enabled for touch on mobile
-        swiper.allowTouchMove = true;
-      } else {
-        // Reinitialize ScrollTrigger on desktop
-        if (!scrollTrigger && swiper) {
-          swiper.update();
-          const newMaxTranslate = Math.abs(swiper.maxTranslate());
-          if (newMaxTranslate > 0 && !isNaN(newMaxTranslate)) {
-            initScrollTrigger();
-          }
-        } else if (scrollTrigger) {
-          scrollTrigger.refresh();
-        }
+      } else if (scrollTrigger) {
+        scrollTrigger.refresh();
       }
     };
 
@@ -142,11 +122,9 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
     // Initialize after a short delay to ensure Swiper is ready
     const timeoutId = setTimeout(initScrollTrigger, 300);
 
-    // Also refresh on initial load (only for desktop)
+    // Also refresh on initial load
     refreshTimeout = setTimeout(() => {
-      if (!isMobile()) {
-        ScrollTrigger.refresh();
-      }
+      ScrollTrigger.refresh();
     }, 500);
 
     return () => {
@@ -173,7 +151,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = () => {
 
   return (
     <div ref={sectionRef} className="w-full bg-white overflow-hidden">
-      <div className="max-w-7xl flex flex-col py-0 sm:py-16 md:py-20 mx-auto px-4">
+      <div className="max-w-7xl flex flex-col py-4 sm:py-16  mx-auto px-4">
         <motion.div
           className="text-black text-2xl sm:text-3xl md:text-4xl"
           initial={{ opacity: 0, y: 30 }}
