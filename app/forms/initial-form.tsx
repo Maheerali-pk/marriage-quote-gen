@@ -21,7 +21,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-10 md:gap-10 w-full z-10 md:px-40 px-8 pt-10  md:pt-40">
+      <div className="flex flex-col sm:grid sm:grid-cols-[1fr_1fr] gap-10 sm:gap-10 w-full z-10 md:px-40 px-8 pt-10  md:pt-40">
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2 text-white text-5xl">
             A jeni gati
