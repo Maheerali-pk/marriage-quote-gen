@@ -29,7 +29,7 @@ const NameForm: React.FC<NameFormProps> = () => {
           <CustomInput
             value={state.brideName}
             onChange={(value) => dispatch({ setState: { brideName: value } })}
-            label="Emri dhe Mbiemri"
+            label="Emri i nuses"
           />
 
           <CustomInput
