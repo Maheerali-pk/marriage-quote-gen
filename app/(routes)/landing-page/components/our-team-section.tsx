@@ -50,7 +50,7 @@ const OurTeamSection: React.FC<OurTeamSectionProps> = () => {
               <h3 className="text-white text-5xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
                 ARLIND BERISHA
               </h3>
-              <div className="text-white">
+              <div className="text-white text-lg">
                 Arlind është themeluesi i ZOOM Production dhe një ndër mendjet
                 më strategjike në industrinë kreative shqiptare. Si personi që
                 qëndron pas disa bizneseve të suksesshme, ai e transformoi ZOOM

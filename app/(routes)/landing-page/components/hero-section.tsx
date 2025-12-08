@@ -9,7 +9,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
   const router = useRouter();
   return (
     <div
-      className="h-auto pb-20 md:pb-0 md:h-screen w-full flex items-center flex-col"
+      className="h-auto pb-20 md:pb-0 md:h-screen w-full flex items-center flex-col "
       style={{
         backgroundImage: "url('/images/main-bg.png')",
         backgroundSize: "cover",
@@ -22,7 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       <motion.img
         src="/images/logo.png"
         alt="logo"
-        className="w-auto mx-auto h-8 sm:h-10 md:h-14 mt-5 sm:mt-8 md:mt-10 mb-5 sm:mb-8 md:mb-10 z-10 px-4"
+        className="w-auto mx-auto h-8 sm:h-20  mt-5 sm:mt-8 md:mt-10 mb-5 sm:mb-8 md:mb-10 z-10 px-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -69,7 +69,15 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
           transition={{ duration: 0.8, delay: 1 }}
         >
           <button
-            onClick={() => router.push("/initial")}
+            onClick={() => {
+              const secondSection = document.querySelector("#second-section");
+              if (secondSection) {
+                (secondSection as HTMLElement).scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            }}
             className="btn-secondary w-full sm:w-fit !rounded-full text-sm sm:text-base"
           >
             LEXO MË SHUMË RRETH ZP

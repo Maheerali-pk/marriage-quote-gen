@@ -4,16 +4,14 @@ interface VideoItemProps {}
 const VideoItem: React.FC<VideoItemProps> = () => {
   return (
     <div className="w-full relative">
-      <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-        <iframe
-          className="absolute top-0 left-0 w-full h-full rounded-lg"
-          src="https://www.youtube.com/embed/z4zxdsFBCbI"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-          style={{ border: "none" }}
-        ></iframe>
-      </div>
+      <img
+        src="/images/video.png"
+        className="w-full h-auto  top-0 left-0 brightness-50"
+      ></img>
+      <img
+        className="w-20 h-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        src="/images/play-icon.png"
+      ></img>
     </div>
   );
 };

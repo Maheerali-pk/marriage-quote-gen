@@ -10,7 +10,10 @@ interface SecondSectionProps {}
 
 const SecondSection: React.FC<SecondSectionProps> = () => {
   return (
-    <div className="h-full w-full flex flex-col bg-black pt-10 sm:pt-16 md:pt-20">
+    <div
+      className="h-full w-full flex flex-col bg-black pt-10 sm:pt-16 md:pt-20"
+      id="second-section"
+    >
       <div className="max-w-7xl w-full mx-auto px-4">
         {/* Mobile Marquee - only visible on mobile */}
         <motion.div
@@ -85,10 +88,7 @@ const SecondSection: React.FC<SecondSectionProps> = () => {
           <div className="text-white text-center text-xl sm:text-2xl md:text-3xl">
             WELCOME TO
           </div>
-          <img
-            src="/images/logo.png"
-            className="h-32 sm:h-40 md:h-52 lg:h-60"
-          ></img>
+          <img src="/images/logo.png" className="h-20 sm:h-32 "></img>
         </motion.div>
         {/* Mobile Swiper - only visible on mobile */}
         <motion.div
