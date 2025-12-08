@@ -11,7 +11,7 @@ const InitialForm: React.FC<InitialFormProps> = () => {
   };
   return (
     <div
-      className="min-h-screen w-screen flex justify-center  md:items-center !overflow-auto relative"
+      className="min-h-screen w-full flex justify-center  md:items-center !overflow-auto relative"
       style={{
         backgroundImage: "url('/images/main-bg.png')",
         backgroundSize: "cover",
@@ -27,16 +27,16 @@ const InitialForm: React.FC<InitialFormProps> = () => {
             A jeni gati
           </div>
 
-          <div className="text-primary text-8xl md:text-9xl text-shadow-lg text-shadow-primary">
-            të shkëlqeni
-          </div>
           <div
-            className="text-white text-xl md:text-2xl md:ml-56"
+            className="text-primary text-6xl md:text-8xl"
             style={{
               textShadow:
                 "0 0 10px rgba(212, 170, 0, 0.8), 0 0 20px rgba(212, 170, 0, 0.6), 0 0 30px rgba(212, 170, 0, 0.4)",
             }}
           >
+            të shkëlqeni
+          </div>
+          <div className="text-white text-xl md:text-3xl md:ml-56">
             në filmin e dasmës suaj
           </div>
         </div>
