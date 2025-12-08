@@ -30,7 +30,13 @@ const InitialForm: React.FC<InitialFormProps> = () => {
           <div className="text-primary text-8xl md:text-9xl text-shadow-lg text-shadow-primary">
             të shkëlqeni
           </div>
-          <div className="text-white text-3xl md:ml-56">
+          <div
+            className="text-white text-xl md:text-2xl md:ml-56"
+            style={{
+              textShadow:
+                "0 0 10px rgba(212, 170, 0, 0.8), 0 0 20px rgba(212, 170, 0, 0.6), 0 0 30px rgba(212, 170, 0, 0.4)",
+            }}
+          >
             në filmin e dasmës suaj
           </div>
         </div>
