@@ -1,5 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
 
 interface SecondSectionProps {}
 
@@ -54,16 +58,42 @@ const SecondSection: React.FC<SecondSectionProps> = () => {
             className="h-32 sm:h-40 md:h-52 lg:h-60"
           ></img>
         </motion.div>
+        {/* Mobile Swiper - only visible on mobile */}
+        <motion.div
+          className="block sm:hidden mt-4 overflow-hidden px-4"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+        >
+          <Swiper
+            modules={[FreeMode]}
+            freeMode={true}
+            spaceBetween={0}
+            slidesPerView="auto"
+            className="!pb-4"
+          >
+            <SwiperSlide style={{ width: "150vw" }} className="!w-[150vw]">
+              <img
+                src={"/images/lp/reels-list.png"}
+                alt="reels list"
+                className="w-full h-auto"
+              />
+            </SwiperSlide>
+          </Swiper>
+        </motion.div>
+
+        {/* Desktop Image - hidden on mobile */}
         <motion.img
           src={"/images/lp/reels-list.png"}
-          className="w-full h-auto mt-4 sm:mt-6 md:mt-8"
+          className="hidden sm:block w-full h-auto mt-4 sm:mt-6 md:mt-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         ></motion.img>
         <motion.div
-          className="text-white text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl mx-auto mt-20 sm:mt-32 md:mt-40 w-full sm:w-5/6 md:w-2/3 px-4"
+          className="text-white  text-left sm:text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl mx-auto mt-20 sm:mt-32 md:mt-40 w-full sm:w-5/6 md:w-2/3 px-4"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -73,7 +103,7 @@ const SecondSection: React.FC<SecondSectionProps> = () => {
           Production, ja qfarë duhët të dini:
         </motion.div>
         <motion.div
-          className="text-white text-base sm:text-lg mt-10 sm:mt-16 md:mt-20 text-center w-full sm:w-5/6 md:w-3/4 lg:w-1/2 mx-auto px-4"
+          className="text-white text-left sm:text-center text-base sm:text-lg mt-10 sm:mt-16 md:mt-20  w-full sm:w-5/6 md:w-3/4 lg:w-1/2 mx-auto px-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

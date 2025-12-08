@@ -1,9 +1,6 @@
 "use client";
 import TeamMemeberCard from "./team-member-card";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/free-mode";
+import Marquee from "react-fast-marquee";
 
 interface OurTeamSectionProps {}
 
@@ -75,20 +72,12 @@ const OurTeamSection: React.FC<OurTeamSectionProps> = () => {
             <TeamMemeberCard key={member.name} {...member} />
           ))}
         </div>
-        <div className="w-full overflow-hidden">
-          <Swiper
-            modules={[FreeMode]}
-            freeMode={true}
-            spaceBetween={40}
-            slidesPerView="auto"
-            className="!pb-10"
-            style={{ width: "100%", overflow: "visible" }}
-          >
+        <div className="w-full overflow-hidden pb-10">
+          <Marquee speed={60} gradient={false} pauseOnHover={false}>
             {otherMembersImages.map((img, index) => (
-              <SwiperSlide
+              <div
                 key={index}
-                style={{ width: "250px", height: "250px" }}
-                className="!w-[200px] !h-[200px]"
+                className="sm:w-[12rem] sm:h-[12rem] w-[8rem] h-[8rem] mr-10 flex-shrink-0"
               >
                 <div className="w-full h-full rounded-4xl relative overflow-hidden">
                   <img
@@ -99,9 +88,9 @@ const OurTeamSection: React.FC<OurTeamSectionProps> = () => {
                   <div className="bg-gradient-to-r absolute rounded-4xl from-[rgba(212,170,0,0.45)] to-transparent w-full h-full z-10"></div>
                   <div className="bg-gradient-to-r absolute rounded-4xl from-[rgba(0,0,0,0.35)] to-transparent w-full h-full z-10"></div>
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+          </Marquee>
         </div>
       </div>
     </div>
