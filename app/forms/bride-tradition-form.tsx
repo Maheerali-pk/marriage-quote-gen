@@ -140,22 +140,19 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-between">
+    <div className="flex flex-col gap-10 ">
       <div className="flex flex-col ">
         <span className="text-white text-base mb-4">
           PYETJA <b>4 NGA 6</b> PYTJE NE TOTAL
         </span>
-        <h1 className="text-white  text-4xl   mb-8">
+        <h1 className="text-white  text-2xl   mb-8">
           <b>A do të keni proceduren tradicionale </b>" Marrje nuseje me Krushqi
           "
         </h1>
         {renderContent()}
       </div>
       <div className="flex w-full justify-between items-center">
-        <button
-          onClick={handleBack}
-          className="btn-back"
-        >
+        <button onClick={handleBack} className="btn-back">
           <svg
             className="w-5 h-5"
             fill="none"
@@ -172,10 +169,7 @@ const BrideTraditionForm: React.FC<BrideTraditionFormProps> = () => {
           KTHEHU
         </button>
         {state.brideTradition !== undefined && (
-          <button
-            onClick={handleNext}
-            className="btn-primary w-fit"
-          >
+          <button onClick={handleNext} className="btn-primary w-fit">
             VAZHDO
           </button>
         )}

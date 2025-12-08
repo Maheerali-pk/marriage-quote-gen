@@ -17,8 +17,10 @@ export default function WeddingVenuePage() {
     >
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 "></div>
-      <div className="flex gap-8 w-full  justify-start items-start z-10">
-        <ResultsLeftSection></ResultsLeftSection>
+      <div className="flex gap-8 w-full  justify-start items-start z-10 ">
+        <div className="sm:fixed static sm:max-w-[40vw]">
+          <ResultsLeftSection></ResultsLeftSection>
+        </div>
       </div>
 
       <div className="flex gap-8 w-full  justify-start items-start z-10">

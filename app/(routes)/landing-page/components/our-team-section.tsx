@@ -77,7 +77,7 @@ const OurTeamSection: React.FC<OurTeamSectionProps> = () => {
             {otherMembersImages.map((img, index) => (
               <div
                 key={index}
-                className="sm:w-[12rem] sm:h-[12rem] w-[8rem] h-[8rem] mr-10 flex-shrink-0"
+                className="sm:w-[13rem] sm:h-[13rem] w-[10rem] h-[10rem] mr-10 flex-shrink-0"
               >
                 <div className="w-full h-full rounded-4xl relative overflow-hidden">
                   <img

@@ -27,7 +27,15 @@ const EventItem: React.FC<EventItemProps> = ({
 
   const handleIncrement = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (isSelected) {
+    if (!isSelected) {
+      // If not selected, select it first with count 1
+      dispatch({
+        toggleEventItemSelection: {
+          eventGroupId: groupId,
+          itemId: data.id,
+        },
+      });
+    } else {
       dispatch({
         updateItemCount: {
           eventGroupId: groupId,
@@ -97,12 +105,12 @@ const EventItem: React.FC<EventItemProps> = ({
           className="w-auto h-1/2 object-contain"
         />
         <div className="text-white text-2xl text-center">{data.name}</div>
-        {isSelected && showCount && (
+        {showCount && (
           <div className="flex items-center gap-2 bg-transparent border border-white rounded-lg px-2 py-1 mt-2">
             <button
               onClick={handleDecrement}
-              disabled={count <= 1}
-              className="text-white text-lg font-bold w-6 h-6 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 rounded"
+              disabled={!isSelected || count <= 1}
+              className="text-white cursor-pointer text-lg font-bold w-6 h-6 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/20 rounded"
             >
               -
             </button>

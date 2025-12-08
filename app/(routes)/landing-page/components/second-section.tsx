@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
+import Marquee from "react-fast-marquee";
 
 interface SecondSectionProps {}
 
@@ -11,7 +12,38 @@ const SecondSection: React.FC<SecondSectionProps> = () => {
   return (
     <div className="h-full w-full flex flex-col bg-black pt-10 sm:pt-16 md:pt-20">
       <div className="max-w-7xl w-full mx-auto px-4">
-        <div className="flex flex-col mx-auto w-full gap-6 sm:gap-8 md:gap-10">
+        {/* Mobile Marquee - only visible on mobile */}
+        <motion.div
+          className="block sm:hidden mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <Marquee speed={60} gradient={false} pauseOnHover={false}>
+            <div
+              className="text-white text-xl mr-16 flex-shrink-0"
+              style={{ width: "66.67vw" }}
+            >
+              10 VITE PUNË
+            </div>
+            <div
+              className="text-white text-xl mr-16 flex-shrink-0"
+              style={{ width: "66.67vw" }}
+            >
+              700+ DASMA TË REALIZUARA
+            </div>
+            <div
+              className="text-white text-xl mr-16 flex-shrink-0"
+              style={{ width: "66.67vw" }}
+            >
+              VIRALITET WORLD-WIDE
+            </div>
+          </Marquee>
+        </motion.div>
+
+        {/* Desktop Layout - hidden on mobile */}
+        <div className="hidden sm:flex flex-col mx-auto w-full gap-6 sm:gap-8 md:gap-10">
           <motion.div
             className="flex w-full justify-start text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl"
             initial={{ opacity: 0, x: -50 }}

@@ -699,3 +699,45 @@ html {
   position: relative;
   z-index: 999999 !important;
 }
+
+/* Custom Scrollbar Styling - Dark Theme */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 170, 0, 0.5);
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 170, 0, 0.7);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(212, 170, 0, 0.9);
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 170, 0, 0.5) rgba(0, 0, 0, 0.8);
+}
+
+/* Optional: Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

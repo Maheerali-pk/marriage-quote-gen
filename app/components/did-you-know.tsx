@@ -4,6 +4,7 @@ interface DidYouKnowProps {
   title: string;
   description: string;
   large?: boolean;
+  className?: string;
 }
 
 const DidYouKnow: React.FC<DidYouKnowProps> = ({
