@@ -22,7 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = () => {
       <motion.img
         src="/images/logo.png"
         alt="logo"
-        className="w-auto mx-auto h-8 sm:h-20  mt-5 sm:mt-8 md:mt-10 mb-5 sm:mb-8 md:mb-10 z-10 px-4"
+        className="w-auto mx-auto h-14 sm:h-20  mt-5 sm:mt-8 md:mt-10 mb-5 sm:mb-8 md:mb-10 z-10 px-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
