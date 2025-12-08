@@ -28,14 +28,14 @@ html {
 @media screen and (max-width: 1700px) {
   html,
   body {
-    font-size: 90%;
+    font-size: 80%;
   }
 }
 
 @media screen and (max-width: 1500px) {
   html,
   body {
-    font-size: 80%;
+    font-size: 70%;
   }
 }
 
@@ -57,61 +57,16 @@ html {
   border: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
   transform: translateY(0) scale(1);
   box-shadow: 0 4px 12px rgba(212, 170, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
   outline: none;
 }
 
-.btn-primary::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.3) 0%,
-    transparent 70%
-  );
-  transform: translate(-50%, -50%);
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-}
-
-.btn-primary::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 50%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
 .btn-primary:hover {
-  background-color: rgba(212, 170, 0, 0.95);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(212, 170, 0, 0.4), 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.btn-primary:hover::before {
-  width: 400px;
-  height: 400px;
-}
-
-.btn-primary:hover::after {
-  opacity: 1;
+  background-color: rgba(212, 170, 0, 0.9);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(212, 170, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
@@ -119,12 +74,7 @@ html {
   box-shadow: 0 4px 8px rgba(212, 170, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
   background-color: rgba(212, 170, 0, 1);
-}
-
-.btn-primary:active::before {
-  width: 200px;
-  height: 200px;
-  transition: width 0.1s, height 0.1s;
+  filter: brightness(1);
 }
 
 .btn-primary:focus-visible {
@@ -155,22 +105,14 @@ html {
 
 .btn-primary.btn-small:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(212, 170, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.btn-primary.btn-small:hover::before {
-  width: 300px;
-  height: 300px;
+  box-shadow: 0 6px 14px rgba(212, 170, 0, 0.5), 0 3px 6px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
 }
 
 .btn-primary.btn-small:active {
   transform: translateY(-1px) scale(0.98);
   box-shadow: 0 2px 6px rgba(212, 170, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.btn-primary.btn-small:active::before {
-  width: 150px;
-  height: 150px;
+  filter: brightness(1);
 }
 
 .btn-primary.btn-small:disabled:hover {
@@ -387,76 +329,25 @@ html {
   border: 2px solid rgba(212, 170, 0, 1);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
   transform: translateY(0) scale(1);
   box-shadow: 0 4px 12px rgba(212, 170, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
-.btn-secondary::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(212, 170, 0, 0.3) 0%,
-    transparent 70%
-  );
-  transform: translate(-50%, -50%);
-  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-}
-
-.btn-secondary::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(212, 170, 0, 0.1) 0%,
-    transparent 50%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
 .btn-secondary:hover {
-  background-color: rgba(212, 170, 0, 0.1);
+  background-color: rgba(212, 170, 0, 0.15);
   border-color: rgba(212, 170, 0, 1);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(212, 170, 0, 0.4), 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.btn-secondary:hover::before {
-  width: 400px;
-  height: 400px;
-}
-
-.btn-secondary:hover::after {
-  opacity: 1;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(212, 170, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
 }
 
 .btn-secondary:active {
   transform: translateY(-1px) scale(0.98);
   box-shadow: 0 4px 8px rgba(212, 170, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: rgba(212, 170, 0, 0.15);
-}
-
-.btn-secondary:active::before {
-  width: 200px;
-  height: 200px;
-  transition: width 0.1s, height 0.1s;
+  background-color: rgba(212, 170, 0, 0.2);
+  filter: brightness(1);
 }
 
 .btn-secondary:focus-visible {
