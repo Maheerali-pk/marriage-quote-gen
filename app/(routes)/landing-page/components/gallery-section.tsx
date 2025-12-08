@@ -11,7 +11,7 @@ interface GallerySectionProps {}
 const GallerySection: React.FC<GallerySectionProps> = () => {
   return (
     <div className="w-full bg-white overflow-hidden mt-10 sm:mt-16 md:mt-20">
-      <div className="max-w-7xl flex flex-col py-10 sm:py-16 md:py-20 mx-auto px-4">
+      <div className="max-w-7xl flex flex-col  sm:py-16 md:py-20 mx-auto px-4">
         <motion.div
           className="text-black text-2xl sm:text-3xl md:text-4xl font-medium"
           initial={{ opacity: 0, y: 30 }}
@@ -36,34 +36,32 @@ const GallerySection: React.FC<GallerySectionProps> = () => {
           <br></br>
         </motion.div>
         <motion.div
-          className="w-full overflow-hidden -mx-4"
+          className="w-full overflow-hidden"
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1, delay: 0.3 }}
         >
           <Swiper
-            modules={[FreeMode, Autoplay]}
+            modules={[FreeMode]}
             freeMode={true}
             spaceBetween={0}
             slidesPerView="auto"
             loop={true}
             autoplay={{
-              delay: 3000,
               disableOnInteraction: false,
             }}
-            speed={3000}
             className="!pb-10"
             style={{ width: "100%", overflow: "visible" }}
           >
-            <SwiperSlide style={{ width: "200vw" }} className="!w-[200vw]">
+            <SwiperSlide className="sm:!w-[80vw] !w-[150vw]">
               <img
                 src="/images/lp/gallery.png"
                 alt="gallery"
                 className="w-full h-auto"
               />
             </SwiperSlide>
-            <SwiperSlide style={{ width: "200vw" }} className="!w-[200vw]">
+            <SwiperSlide className="sm:!w-[80vw] !w-[150vw]">
               <img
                 src="/images/lp/gallery.png"
                 alt="gallery"
