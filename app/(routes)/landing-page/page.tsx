@@ -1,3 +1,4 @@
+import AwardsSection from "./components/awards-section";
 import { FaqSection } from "./components/faq-section";
 import FooterSection from "./components/footer-section";
 import GallerySection from "./components/gallery-section";
@@ -18,6 +19,7 @@ export default function LandingPage() {
       <GallerySection />
       <MemoriesSection></MemoriesSection>
       <OurTeamSection></OurTeamSection>
+      <AwardsSection></AwardsSection>
       <SocialMediaRecordsSection></SocialMediaRecordsSection>
       <WeddingCountriesSection></WeddingCountriesSection>
       <FaqSection></FaqSection>

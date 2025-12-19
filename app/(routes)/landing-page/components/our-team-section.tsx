@@ -1,6 +1,7 @@
 "use client";
 import TeamMemeberCard from "./team-member-card";
 import Marquee from "react-fast-marquee";
+import { useRouter } from "next/navigation";
 
 interface OurTeamSectionProps {}
 
@@ -29,8 +30,20 @@ const otherMembersImages = Array.from({ length: 10 }, (_, index) => {
 });
 
 const OurTeamSection: React.FC<OurTeamSectionProps> = () => {
+  const router = useRouter();
   return (
     <div className="bg-[#1f1e1b] w-full h-full md:py-40 py-10">
+      <div className="flex items-center flex-col z-10 gap-4 mb-14 ">
+        <button
+          onClick={() => router.push("/initial")}
+          className="btn btn-primary   w-fit  !rounded-full"
+        >
+          REZERVO DATËN TËNDE
+        </button>
+        <div className="text-white text-sm z-10">
+          Apo vazhdo lexo ende me poshtë
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto flex flex-col gap-10 px-4">
         <h3 className="text-white text-4xl  md:text-7xl  font-bold">
           Kush qëndron mbrapa suksesit të ZOOM Production...

@@ -1,4 +1,7 @@
+"use client";
+import { useRouter } from "next/navigation";
 export function MemoriesSection() {
+  const router = useRouter();
   return (
     <div className="gap-10 overflow-hidden relative">
       <div className="flex flex-col max-w-7xl mx-auto w-full px-4 ">
@@ -24,7 +27,7 @@ export function MemoriesSection() {
       <img
         src="/images/lp/blur-rect.png"
         alt="Memories Background"
-        className=" absolute top-full -translate-y-[1.5rem]  sm:-translate-y-[10rem]"
+        className=" absolute top-full -translate-y-[1.5rem]   sm:-translate-y-[10rem]"
       ></img>
     </div>
   );
