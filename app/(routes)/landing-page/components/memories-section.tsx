@@ -31,10 +31,10 @@ export function MemoriesSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="bg-[#aa8800] sm:p-4 p-2 h-fit  text-white flex-col rounded-2xl  overflow-hidden max-w-[20rem] sm:max-w-[30rem] gap-2 items-center shadow-[0_25px_80px_rgba(0,0,0,0.5),0_15px_40px_rgba(170,136,0,0.3),0_0_0_2px_rgba(255,255,255,0.1)]"
           >
-            <div className="sm:text-5xl text-2xl font-bold text-center">
+            <div className="sm:text-5xl text-lg font-bold text-center">
               PAKO PREMIUM
             </div>
-            <div className="sm:text-lg text-sm text-center">
+            <div className="sm:text-lg text-xs text-center">
               Ruaj kujtimet tua me shekuj me pakon tone te sigurt dhe moderne
             </div>
           </motion.div>
@@ -49,7 +49,7 @@ export function MemoriesSection() {
           />
         </div>
 
-        <div className="flex flex-col absolute sm:bottom-0  bottom-8 -translate-y-1/2 right-[2rem] gap-10   ">
+        <div className="flex flex-col absolute sm:bottom-0  bottom-8 -translate-y-1/2 sm:right-[2rem] -right-2 gap-10   ">
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -57,10 +57,10 @@ export function MemoriesSection() {
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="bg-[#aa8800] sm:p-4 p-2    text-white flex-col rounded-2xl  overflow-hidden sm:max-w-[18rem] max-w-[14rem] gap-2 items-center shadow-[0_25px_80px_rgba(0,0,0,0.5),0_15px_40px_rgba(170,136,0,0.3),0_0_0_2px_rgba(255,255,255,0.1)]"
           >
-            <div className="sm:text-3xl text-xl font-bold text-center">
+            <div className="sm:text-3xl text-lg font-bold text-center">
               PAKO PREMIUM
             </div>
-            <div className="text-sm text-center">
+            <div className="text-xs sm:text-sm text-center">
               Ruaj kujtimet tua me shekuj me pakon tone te sigurt dhe moderne
             </div>
           </motion.div>
@@ -75,18 +75,18 @@ export function MemoriesSection() {
           />
         </div>
 
-        <div className="flex flex-col absolute top-1/3 sm:top-1/2  sm:left-[10rem] left-[4rem] gap-4   ">
+        <div className="flex flex-col absolute top-1/3 sm:top-1/2  sm:left-[10rem] left-12 gap-4   ">
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="bg-[#aa8800] sm:p-4 p-2 sm:px-4 px-0  text-white flex-col rounded-2xl  overflow-hidden sm:max-w-[18rem] max-w-[14rem] gap-2 items-center shadow-[0_25px_80px_rgba(0,0,0,0.5),0_15px_40px_rgba(170,136,0,0.3),0_0_0_2px_rgba(255,255,255,0.1)]"
+            className="bg-[#aa8800] sm:p-4 p-2    text-white flex-col rounded-2xl  overflow-hidden sm:max-w-[18rem] max-w-[12rem] sm:max-w-[14rem] gap-2 items-center shadow-[0_25px_80px_rgba(0,0,0,0.5),0_15px_40px_rgba(170,136,0,0.3),0_0_0_2px_rgba(255,255,255,0.1)]"
           >
-            <div className="sm:text-3xl text-xl font-bold text-center">
+            <div className="sm:text-3xl text-lg font-bold text-center">
               1TB SECURE DISK
             </div>
-            <div className="text-sm text-center">
+            <div className="text-xs sm:text-sm text-center">
               Qe kujtimet e tuaja te ruhen sigurt, kemi 1TB HDD
             </div>
           </motion.div>
